@@ -1,0 +1,30 @@
+<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+    <thead>
+    <tr>
+        <th class="mdl-data-table__cell--non-numeric">Name</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td class="mdl-data-table__cell--non-numeric">
+            <span *ngIf="!editField">{{instance.name}}</span>
+            <input type="text"
+                   #input
+                   *ngIf="editField"
+                   name="name"
+                   [(ngModel)]="instance.name">
+        </td>
+        <td>
+            <span (click)="edit(instance.name)">
+                <i class="material-icons"
+                   [ngStyle]="{'color': iconColor}">edit</i>
+            </span>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<button (click)="save(instance)"
+        class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+    <i class="material-icons">save</i>
+</button>

@@ -1,0 +1,30 @@
+@import "../../scss/mixins.scss";
+
+.demo-card-wide.mdl-card {
+    width: 512px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    @include transform(translate(-50%, -50%));
+}
+.demo-card-wide > .mdl-card__title {
+    color: #fff;
+    height: 176px;
+    background: url('../../assets/images/welcome_card.jpg') center / cover;
+}
+.demo-card-wide > .mdl-card__menu {
+    color: #fff;
+}
+
+form {
+    padding: 16px;
+
+    .mdl-textfield {
+        width: 100%;
+    }
+
+    .mdl-card__actions.mdl-card--border {
+        border-top: 0;
+    }
+}
+
