@@ -1,0 +1,26 @@
+@import '../../scss/mixins';
+
+:host {
+    .demo-drawer-header {
+        height: auto;
+    }
+    .mdl-layout .demo-drawer header ul {
+        position: absolute;
+        top: 50px;
+        right: 0;
+        margin: 0;
+        padding: 0;
+        background-color: #FFF;
+
+        li {
+            opacity: 1;
+            @include border-radius(10px);
+        }
+    }
+    .truncate {
+        width: 200px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}

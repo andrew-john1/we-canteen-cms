@@ -1,0 +1,39 @@
+<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+    <thead>
+    </thead>
+    <tbody>
+    <tr>
+        <td class="mdl-data-table__cell--non-numeric">First Name</td>
+        <td class="mdl-data-table__cell--non-numeric">
+            <input type="text"
+                   name="firstName"
+                   [(ngModel)]="user.firstName">
+        </td>
+    </tr>
+    <tr>
+        <td class="mdl-data-table__cell--non-numeric">Last Name</td>
+        <td class="mdl-data-table__cell--non-numeric">
+            <input type="text"
+                   name="lastName"
+                   [(ngModel)]="user.lastName">
+        </td>
+    </tr>
+    <tr>
+        <td class="mdl-data-table__cell--non-numeric">Email</td>
+        <td class="mdl-data-table__cell--non-numeric">
+            <input type="email"
+                   name="email"
+                   [(ngModel)]="user.email">
+        </td>
+    </tr>
+    </tbody>
+</table>
+<button *ngIf="user._id"
+        (click)="delete()"
+        class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored delete">
+    <i class="material-icons">delete</i>
+</button>
+<button (click)="save(user)"
+        class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored save">
+    <i class="material-icons">save</i>
+</button>

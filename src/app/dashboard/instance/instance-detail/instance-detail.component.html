@@ -1,0 +1,23 @@
+<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+    <thead>
+    </thead>
+    <tbody>
+    <tr>
+        <td class="mdl-data-table__cell--non-numeric">Name</td>
+        <td class="mdl-data-table__cell--non-numeric">
+            <input type="text"
+                   name="name"
+                   [(ngModel)]="instance.name">
+        </td>
+    </tr>
+    </tbody>
+</table>
+<button (click)="save(instance)"
+        class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored save">
+    <i class="material-icons">save</i>
+</button>
+<button *ngIf="instance._id"
+        (click)="delete()"
+        class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored delete">
+    <i class="material-icons">delete</i>
+</button>

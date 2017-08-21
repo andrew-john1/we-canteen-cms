@@ -1,0 +1,63 @@
+<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+    <thead>
+    </thead>
+    <tbody>
+    <tr>
+        <td class="mdl-data-table__cell--non-numeric">Name</td>
+        <td class="mdl-data-table__cell--non-numeric">
+            <input type="text"
+                   name="name"
+                   [(ngModel)]="location.name">
+        </td>
+    </tr>
+    <tr>
+        <td class="mdl-data-table__cell--non-numeric">Street</td>
+        <td class="mdl-data-table__cell--non-numeric">
+            <input type="text"
+                   name="street"
+                   [(ngModel)]="location.street">
+        </td>
+    </tr>
+    <tr>
+        <td class="mdl-data-table__cell--non-numeric">Number</td>
+        <td class="mdl-data-table__cell--non-numeric">
+            <input type="number"
+                   name="number"
+                   [(ngModel)]="location.number">
+        </td>
+    </tr>
+    <tr>
+        <td class="mdl-data-table__cell--non-numeric">Number Suffix</td>
+        <td class="mdl-data-table__cell--non-numeric">
+            <input type="text"
+                   name="numberSuffix"
+                   [(ngModel)]="location.numberSuffix">
+        </td>
+    </tr>
+    <tr>
+        <td class="mdl-data-table__cell--non-numeric">Postal Code</td>
+        <td class="mdl-data-table__cell--non-numeric">
+            <input type="text"
+                   name="postal"
+                   [(ngModel)]="location.postalCode">
+        </td>
+    </tr>
+    <tr>
+        <td class="mdl-data-table__cell--non-numeric">City</td>
+        <td class="mdl-data-table__cell--non-numeric">
+            <input type="text"
+                   name="city"
+                   [(ngModel)]="location.city">
+        </td>
+    </tr>
+    </tbody>
+</table>
+<button *ngIf="location._id"
+        (click)="delete()"
+        class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored delete">
+    <i class="material-icons">delete</i>
+</button>
+<button (click)="save(location)"
+        class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored save">
+    <i class="material-icons">save</i>
+</button>

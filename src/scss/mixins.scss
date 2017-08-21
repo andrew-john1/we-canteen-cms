@@ -13,18 +13,26 @@
         width: 100%;
 
         input {
-            width: 200px;
+            float: left;
+            width: 100%;
         }
     }
 
-    .mdl-button--fab.mdl-button--colored {
+    .save {
         position: absolute;
         bottom: 50px;
         right: 50px;
     }
+
+    .delete {
+        position: absolute;
+        bottom: 50px;
+        right: 120px;
+        background-color: lightcoral;
+    }
 }
 
-@mixin fabButton() {
+@mixin input() {
     border: 0;
     font-size: 13px;
     font-weight: 400;
@@ -33,4 +41,10 @@
     font-family: 'Roboto', 'Helvetica', sans-serif;
     background-color: transparent;
     outline: none;
+}
+
+@mixin border-radius($border) {
+    -webkit-border-radius: $border;
+    -moz-border-radius: $border;
+    border-radius: $border;
 }

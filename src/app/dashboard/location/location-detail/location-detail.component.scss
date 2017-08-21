@@ -1,0 +1,8 @@
+@import '../../../../scss/mixins';
+
+:host {
+    @include layout;
+    table input {
+        @include input;
+    }
+}

@@ -1,0 +1,23 @@
+<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+    <thead>
+    <tr>
+        <th class="mdl-data-table__cell--non-numeric">Name</th>
+        <th class="mdl-data-table__cell--non-numeric">Email Domain</th>
+        <th class="mdl-data-table__cell--non-numeric">Users</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let company of companies"
+        routerLink="./{{company._id}}"
+        routerLinkActive="active">
+        <td class="mdl-data-table__cell--non-numeric">{{company.name}}</td>
+        <td class="mdl-data-table__cell--non-numeric">{{company.emailDomain}}</td>
+        <td class="mdl-data-table__cell--non-numeric">{{usersObject[company._id]}}</td>
+    </tr>
+    </tbody>
+</table>
+<button routerLink="./new"
+        routerLinkActive="active"
+        class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored save">
+    <i class="material-icons">add</i>
+</button>

@@ -5,11 +5,11 @@ import {AppComponent} from './app.component';
 import {LoginComponent} from './login/login.component';
 import {HttpModule} from '@angular/http';
 import {HttpService} from './services/http.service';
-import {AdminModule} from './admin/admin.module';
 import {AuthService} from './services/auth.service';
 import {AuthGuard} from './guards/auth.guard';
-import {AppRoutingModule} from "./app-routing.module";
 import {FormsModule} from '@angular/forms';
+import {DashboardModule} from './dashboard/dashboard.module';
+import {AppRoutingModule} from './app-routing.module';
 
 @NgModule({
     declarations: [
@@ -20,7 +20,7 @@ import {FormsModule} from '@angular/forms';
         BrowserModule,
         HttpModule,
         FormsModule,
-        AdminModule,
+        DashboardModule,
         AppRoutingModule
     ],
     providers: [
