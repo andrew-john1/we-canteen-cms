@@ -5,3 +5,32 @@
     -o-transform: $args;
     transform: $args;
 }
+
+@mixin layout() {
+    width: 100%;
+
+    table {
+        width: 100%;
+
+        input {
+            width: 200px;
+        }
+    }
+
+    .mdl-button--fab.mdl-button--colored {
+        position: absolute;
+        bottom: 50px;
+        right: 50px;
+    }
+}
+
+@mixin fabButton() {
+    border: 0;
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0;
+    padding: 0;
+    font-family: 'Roboto', 'Helvetica', sans-serif;
+    background-color: transparent;
+    outline: none;
+}

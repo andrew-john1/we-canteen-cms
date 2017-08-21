@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 
 import {AdminComponent} from './admin.component';
-
 import {AdminRoutingModule} from './admin-routing.module';
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {CompanyOverviewComponent} from './company/company-overview/company-overview.component';
@@ -20,6 +19,7 @@ import {UserDetailComponent} from './user/user-detail/user-detail.component';
 import {InstanceOverviewComponent} from './instance/instance-overview/instance-overview.component';
 import {InstanceDetailComponent} from './instance/instance-detail/instance-detail.component';
 import {FormsModule} from '@angular/forms';
+import {CalendarComponent} from 'ap-angular2-fullcalendar';
 
 @NgModule({
     imports: [
@@ -43,7 +43,8 @@ import {FormsModule} from '@angular/forms';
         MealDetailComponent,
         UserOverviewComponent,
         UserDetailComponent,
-        DashboardComponent
+        DashboardComponent,
+        CalendarComponent
     ]
 })
 export class AdminModule {

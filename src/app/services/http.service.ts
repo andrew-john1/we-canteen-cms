@@ -21,14 +21,14 @@ export class HttpService {
     }
 
     async postData(url, data): Promise<any> {
-        const response = await this.http.post(`${this.url}${url}`, {data}, {headers: this.headers})
+        const response = await this.http.post(`${this.url}${url}`, data, {headers: this.headers})
             .toPromise();
 
         return response.json() || {};
     }
 
     async patchData(url, data): Promise<any> {
-        const response = await this.http.patch(`${this.url}${url}`, {data}, {headers: this.headers})
+        const response = await this.http.patch(`${this.url}${url}`, data, {headers: this.headers})
             .toPromise();
 
         return response.json() || {};

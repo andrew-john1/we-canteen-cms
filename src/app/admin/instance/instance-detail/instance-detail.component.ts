@@ -8,12 +8,9 @@ import {ActivatedRoute, Router} from '@angular/router';
     styleUrls: ['./instance-detail.component.scss']
 })
 export class InstanceDetailComponent implements OnInit {
-    @ViewChild('input') input;
 
     id;
     instance = {};
-    editField = false;
-    iconColor = '#6f8692';
 
     constructor(private httpService: HttpService,
                 private activatedRoute: ActivatedRoute,
@@ -25,29 +22,12 @@ export class InstanceDetailComponent implements OnInit {
             this.id = params['id'];
         });
 
-        if (this.id === 'new') {
-            this.editField = !this.editField;
-            this.iconColor = 'darkgreen';
-
-            setTimeout(() => {
-                this.input.nativeElement.focus();
-            }, 100);
-        } else {
-            this.instance = await this.httpService.getData(`/instances/${this.id}`);
-        }
-    }
-
-    edit() {
-        this.editField = !this.editField;
-
-        if (this.editField) {
-            this.iconColor = 'darkgreen';
-
-            setTimeout(() => {
-                this.input.nativeElement.focus();
-            }, 100);
-        } else {
-            this.iconColor = '#6f8692';
+        if (this.id !== 'new') {
+            try {
+                this.instance = await this.httpService.getData(`/instances/${this.id}`);
+            } catch (err) {
+                console.log(err);
+            }
         }
     }
 
@@ -56,9 +36,9 @@ export class InstanceDetailComponent implements OnInit {
             let response;
 
             if (this.id === 'new') {
-                response = await this.httpService.postData(`/instances`, instance);
+                response = await this.httpService.postData('/instances', {instance});
             } else {
-                response = await this.httpService.patchData(`/instances`, instance);
+                response = await this.httpService.patchData('/instances', {instance});
             }
 
             this.router.navigate(['/admin/instances']);
@@ -66,7 +46,6 @@ export class InstanceDetailComponent implements OnInit {
         } catch (err) {
             console.log(err);
         }
-
     }
 
 }
