@@ -1,3 +1,49 @@
-<p>
-  food-entrepreneur-detail works!
-</p>
+<div class="image-up">
+    
+</div>
+<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+    <thead>
+    </thead>
+    <tbody>
+    <tr>
+        <td class="mdl-data-table__cell--non-numeric">Name</td>
+        <td class="mdl-data-table__cell--non-numeric">
+            <input type="text"
+                   name="name"
+                   [(ngModel)]="foodEntrepreneur.name">
+        </td>
+    </tr>
+    <tr>
+        <td class="mdl-data-table__cell--non-numeric">Email</td>
+        <td class="mdl-data-table__cell--non-numeric">
+            <input type="email"
+                   name="email"
+                   [(ngModel)]="foodEntrepreneur.email">
+        </td>
+    </tr>
+    <tr>
+        <td class="mdl-data-table__cell--non-numeric">Phone</td>
+        <td class="mdl-data-table__cell--non-numeric">
+            <input type="text"
+                   name="phone"
+                   [(ngModel)]="foodEntrepreneur.phone">
+        </td>
+    </tr>
+    <tr>
+        <td class="mdl-data-table__cell--non-numeric">Description</td>
+        <td class="mdl-data-table__cell--non-numeric">
+            <textarea [(ngModel)]="foodEntrepreneur.description"
+                      name="description"></textarea>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<button *ngIf="foodEntrepreneur._id"
+        (click)="delete()"
+        class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored delete">
+    <i class="material-icons">delete</i>
+</button>
+<button (click)="save(foodEntrepreneur)"
+        class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored save">
+    <i class="material-icons">save</i>
+</button>

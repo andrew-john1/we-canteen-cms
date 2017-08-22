@@ -1,3 +1,23 @@
-<p>
-  food-entrepreneur-overview works!
-</p>
+<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+    <thead>
+    <tr>
+        <th class="mdl-data-table__cell--non-numeric">Name</th>
+        <th class="mdl-data-table__cell--non-numeric">Email</th>
+        <th class="mdl-data-table__cell--non-numeric">Phone</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let foodEntrepreneur of foodEntrepreneurs"
+        routerLink="./{{foodEntrepreneur._id}}"
+        routerLinkActive="active">
+        <td class="mdl-data-table__cell--non-numeric">{{foodEntrepreneur.name}}</td>
+        <td class="mdl-data-table__cell--non-numeric">{{foodEntrepreneur.email}}</td>
+        <td class="mdl-data-table__cell--non-numeric">{{foodEntrepreneur.phone}}</td>
+    </tr>
+    </tbody>
+</table>
+<button routerLink="./new"
+        routerLinkActive="active"
+        class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored save">
+    <i class="material-icons">add</i>
+</button>
