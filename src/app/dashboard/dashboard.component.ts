@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../services/auth.service';
-import {ActivatedRoute, Router} from '@angular/router';
 import {HttpService} from '../services/http.service';
 import {EventService} from '../services/event.service';
+import {Router} from '@angular/router';
 
 @Component({
     templateUrl: 'dashboard.component.html',
@@ -18,6 +18,12 @@ export class DashboardComponent implements OnInit {
     navigationObject: any = {};
 
     navigation = [
+        {
+            name: 'Account',
+            url: '/dashboard/account',
+            icon: 'account_circle',
+            userRights: 1
+        },
         {
             name: 'Instances',
             url: '/dashboard/instances',
@@ -37,15 +43,33 @@ export class DashboardComponent implements OnInit {
             userRights: 2
         },
         {
+            name: 'Admins',
+            url: '/dashboard/admins',
+            icon: 'people_outline',
+            userRights: 3
+        },
+        {
             name: 'Users',
             url: '/dashboard/users',
             icon: 'people',
             userRights: 2
         },
         {
+            name: 'Calendar',
+            url: '/dashboard/calendar',
+            icon: 'insert_invitation',
+            userRights: 2
+        },
+        {
             name: 'Food Entrepreneurs',
             url: '/dashboard/food-entrepreneurs',
             icon: 'restaurant_menu',
+            userRights: 2
+        },
+        {
+            name: 'Orders',
+            url: '/dashboard/orders',
+            icon: 'assignment',
             userRights: 1
         },
         {
@@ -53,19 +77,12 @@ export class DashboardComponent implements OnInit {
             url: '/dashboard/meals',
             icon: 'room_service',
             userRights: 1
-        },
-        {
-            name: 'Calendar',
-            url: '/dashboard/calendar',
-            icon: 'insert_invitation',
-            userRights: 1
         }
     ];
 
     constructor(public authService: AuthService,
                 private httpService: HttpService,
                 private eventService: EventService,
-                private activatedRoute: ActivatedRoute,
                 private router: Router) {
     }
 
@@ -79,7 +96,7 @@ export class DashboardComponent implements OnInit {
         });
 
         try {
-            this.user = await this.httpService.getData('/user/token');
+            this.user = await this.httpService.getData('/admin/token');
 
             if (this.user.userRights > 2) {
                 this.instances = await this.httpService.getData('/instances');
@@ -108,7 +125,7 @@ export class DashboardComponent implements OnInit {
         this.instance = instance;
         this.showMenu = !this.showMenu;
         try {
-            const response = await this.httpService.postData('/user/instance', {instance});
+            const response = await this.httpService.postData('/admin/instance', {instance});
             localStorage.setItem('token', response.token);
         } catch (err) {
             console.log(err);
@@ -119,6 +136,8 @@ export class DashboardComponent implements OnInit {
     logout() {
         this.authService.logout();
         localStorage.removeItem('token');
+        localStorage.removeItem('userRights');
+        localStorage.removeItem('userId');
         this.router.navigate(['/login']);
     }
 

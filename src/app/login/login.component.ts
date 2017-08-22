@@ -16,10 +16,23 @@ export class LoginComponent {
 
     async login(user) {
         try {
-            const response = await this.authService.login(user);
+            const {
+                token,
+                userRights,
+                userId
+            } = await this.authService.login(user);
 
-            localStorage.setItem('token', response.token);
-            this.router.navigate(['/dashboard']);
+            localStorage.setItem('token', token);
+            localStorage.setItem('userRights', userRights);
+            localStorage.setItem('userId', userId);
+
+            if (userRights === 3) {
+                this.router.navigate(['/dashboard/instances']);
+            } else if (userRights === 2) {
+                this.router.navigate(['/dashboard/user-overview']);
+            } else {
+                this.router.navigate(['/dashboard/order-overview']);
+            }
         } catch (err) {
             console.log(err);
         }

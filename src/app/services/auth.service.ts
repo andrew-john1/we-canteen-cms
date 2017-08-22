@@ -17,7 +17,7 @@ export class AuthService {
     redirectUrl: string;
 
     async login(user): Promise<any> {
-        const response = await this.http.post(`${this.url}/api/cms/user/login`, {user})
+        const response = await this.http.post(`${this.url}/api/cms/admin/login`, {user})
             .toPromise();
 
         this.isLoggedIn = true;

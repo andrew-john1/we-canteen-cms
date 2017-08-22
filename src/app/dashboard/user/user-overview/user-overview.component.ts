@@ -11,24 +11,36 @@ export class UserOverviewComponent implements OnInit, OnDestroy {
 
     users = [];
     subscription: any;
+    companiesObject = {};
 
     constructor(private httpServer: HttpService,
                 private eventService: EventService) {
         this.subscription = this.eventService.getEventChangeEmitter()
             .subscribe(() => {
-                this.httpServer.getData('/users')
-                    .then(users => {
-                        this.users = users;
-                    })
-                    .catch(err => {
-                        console.log(err);
-                    });
+                this.getData();
             });
     }
 
     async ngOnInit() {
+        this.getData();
+    }
+
+    async getData() {
         try {
-            this.users = await this.httpServer.getData('/users');
+            const [
+                users,
+                companies
+            ] = await Promise.all([
+                this.httpServer.getData('/users'),
+                this.httpServer.getData('/companies')
+            ]);
+
+            this.users = users;
+
+            companies.forEach(company => {
+                this.companiesObject[company._id] = company;
+            });
+
         } catch (err) {
             console.log(err);
         }

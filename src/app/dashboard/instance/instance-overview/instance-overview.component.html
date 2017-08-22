@@ -2,8 +2,9 @@
     <thead>
     <tr>
         <th class="mdl-data-table__cell--non-numeric">Name</th>
-        <th>Companies</th>
-        <th>Locations</th>
+        <th class="mdl-data-table__cell--non-numeric">Price</th>
+        <th class="mdl-data-table__cell--non-numeric">Companies</th>
+        <th class="mdl-data-table__cell--non-numeric">Locations</th>
     </tr>
     </thead>
     <tbody>
@@ -11,8 +12,9 @@
         routerLink="./{{instance._id}}"
         routerLinkActive="active">
         <td class="mdl-data-table__cell--non-numeric">{{instance.name}}</td>
-        <td>{{companiesObject[instance._id]}}</td>
-        <td>{{locationsObject[instance._id]}}</td>
+        <td class="mdl-data-table__cell--non-numeric">€{{instance.price}}</td>
+        <td class="mdl-data-table__cell--non-numeric">{{companiesObject[instance._id]}}</td>
+        <td class="mdl-data-table__cell--non-numeric">{{locationsObject[instance._id]}}</td>
     </tr>
     </tbody>
 </table>

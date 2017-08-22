@@ -16,17 +16,15 @@ export class LocationOverviewComponent implements OnInit, OnDestroy {
                 private eventService: EventService) {
         this.subscription = this.eventService.getEventChangeEmitter()
             .subscribe(() => {
-                this.httpServer.getData('/locations')
-                    .then(locations => {
-                        this.locations = locations;
-                    })
-                    .catch(err => {
-                        console.log(err);
-                    });
+                this.getData();
             });
     }
 
     async ngOnInit() {
+        this.getData();
+    }
+
+    async getData() {
         try {
             this.locations = await this.httpServer.getData('/locations');
         } catch (err) {

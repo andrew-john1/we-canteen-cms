@@ -17,17 +17,15 @@ export class CompanyOverviewComponent implements OnInit, OnDestroy {
                 private eventService: EventService) {
         this.subscription = this.eventService.getEventChangeEmitter()
             .subscribe(() => {
-                this.httpServer.getData('/companies')
-                    .then(companies => {
-                        this.companies = companies;
-                    })
-                    .catch(err => {
-                        console.log(err);
-                    });
+                this.getData();
             });
     }
 
     async ngOnInit() {
+        this.getData();
+    }
+
+    async getData() {
         try {
             this.companies = await this.httpServer.getData('/companies');
 

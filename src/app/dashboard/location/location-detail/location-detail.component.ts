@@ -33,12 +33,10 @@ export class LocationDetailComponent implements OnInit {
 
     async save(location) {
         try {
-            let response;
-
             if (this.id === 'new') {
-                response = await this.httpService.postData('/locations', {location});
+                await this.httpService.postData('/locations', {location});
             } else {
-                response = await this.httpService.patchData('/locations', {location});
+                await this.httpService.patchData('/locations', {location});
             }
 
             this.router.navigate(['/dashboard/locations']);

@@ -10,6 +10,16 @@
                    [(ngModel)]="instance.name">
         </td>
     </tr>
+    <tr>
+        <td class="mdl-data-table__cell--non-numeric">Price</td>
+        <td class="mdl-data-table__cell--non-numeric">
+            <input type="text"
+                   name="price"
+                   currencyMask
+                   [options]="priceOptions"
+                   [(ngModel)]="instance.price">
+        </td>
+    </tr>
     </tbody>
 </table>
 <button (click)="save(instance)"

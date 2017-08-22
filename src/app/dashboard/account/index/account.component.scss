@@ -1,0 +1,11 @@
+@import '../../../../scss/mixins';
+
+:host {
+    @include layout;
+    table input {
+        @include input;
+    }
+    .reset-password {
+        margin-top: 20px;
+    }
+}

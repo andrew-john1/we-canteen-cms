@@ -20,15 +20,25 @@ import {CalendarComponent} from 'ap-angular2-fullcalendar';
 import {DashboardComponent} from './dashboard.component';
 import {DashboardRoutingModule} from './dashboard-routing.module';
 import {EventService} from '../services/event.service';
+import {OrderDetailComponent} from './order/order-detail/order-detail.component';
+import {OrderOverviewComponent} from './order/order-overview/order-overview.component';
+import {CurrencyMaskModule} from 'ng2-currency-mask';
+import {AccountComponent} from './account/index/account.component';
+import {AdminOverviewComponent} from './admin/admin-overview/admin-overview.component';
+import {AdminDetailComponent} from './admin/admin-detail/admin-detail.component';
+import {PasswordResetComponent} from './account/password-reset/password-reset.component';
 
 @NgModule({
     imports: [
         CommonModule,
         DashboardRoutingModule,
-        FormsModule
+        FormsModule,
+        CurrencyMaskModule
     ],
     declarations: [
         DashboardComponent,
+        AccountComponent,
+        PasswordResetComponent,
         InstanceOverviewComponent,
         InstanceDetailComponent,
         CompanyOverviewComponent,
@@ -41,9 +51,13 @@ import {EventService} from '../services/event.service';
         FoodEntrepreneurDetailComponent,
         MealOverviewComponent,
         MealDetailComponent,
+        AdminOverviewComponent,
+        AdminDetailComponent,
         UserOverviewComponent,
         UserDetailComponent,
-        CalendarComponent
+        CalendarComponent,
+        OrderDetailComponent,
+        OrderOverviewComponent
     ],
     providers: [
         EventService

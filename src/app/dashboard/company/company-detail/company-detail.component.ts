@@ -33,16 +33,13 @@ export class CompanyDetailComponent implements OnInit {
 
     async save(company) {
         try {
-            let response;
-
             if (this.id === 'new') {
-                response = await this.httpService.postData('/companies', {company});
+                await this.httpService.postData('/companies', {company});
             } else {
-                response = await this.httpService.patchData('/companies', {company});
+                await this.httpService.patchData('/companies', {company});
             }
 
             this.router.navigate(['/dashboard/companies']);
-
         } catch (err) {
             console.log(err);
         }

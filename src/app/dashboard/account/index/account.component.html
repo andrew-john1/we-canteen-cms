@@ -26,22 +26,23 @@
                    [(ngModel)]="user.email">
         </td>
     </tr>
-    <tr>
-        <td class="mdl-data-table__cell--non-numeric">Company</td>
+    <tr *ngIf="user.foodEntrepreneurId && user.userRights === 1">
+        <td class="mdl-data-table__cell--non-numeric">Food Entrepeneur</td>
+        <td class="mdl-data-table__cell--non-numeric">{{foodEntrepreneur.name}}</td>
+    </tr>
+    <tr *ngIf="user.userRights > 1">
+        <td class="mdl-data-table__cell--non-numeric">Food Entrepeneur</td>
         <td class="mdl-data-table__cell--non-numeric">
-            <select [(ngModel)]="user.companyId">
-                <option *ngFor="let company of companies"
-                        [ngValue]="company._id">{{company.name}}</option>
+            <select [(ngModel)]="user.foodEntrepreneurId">
+                <option *ngFor="let foodEntrepreneur of foodEntrepreneurs"
+                        [ngValue]="foodEntrepreneur._id">{{foodEntrepreneur.name}}</option>
             </select>
         </td>
     </tr>
     </tbody>
 </table>
-<button *ngIf="user._id"
-        (click)="delete()"
-        class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored delete">
-    <i class="material-icons">delete</i>
-</button>
+<button (click)="resetPassword()"
+        class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored reset-password">Reset Password</button>
 <button (click)="save(user)"
         class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored save">
     <i class="material-icons">save</i>

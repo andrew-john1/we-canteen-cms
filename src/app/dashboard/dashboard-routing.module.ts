@@ -18,6 +18,12 @@ import {CalendarDetailComponent} from './calendar/calendar-detail/calendar-detai
 import {InstanceOverviewComponent} from './instance/instance-overview/instance-overview.component';
 import {InstanceDetailComponent} from './instance/instance-detail/instance-detail.component';
 import {DashboardComponent} from './dashboard.component';
+import {OrderOverviewComponent} from './order/order-overview/order-overview.component';
+import {OrderDetailComponent} from './order/order-detail/order-detail.component';
+import {AccountComponent} from './account/index/account.component';
+import {AdminOverviewComponent} from './admin/admin-overview/admin-overview.component';
+import {AdminDetailComponent} from './admin/admin-detail/admin-detail.component';
+import {PasswordResetComponent} from './account/password-reset/password-reset.component';
 
 const dashboardRoutes: Routes = [
     {
@@ -29,14 +35,20 @@ const dashboardRoutes: Routes = [
                 path: '',
                 canActivateChild: [AuthGuard],
                 children: [
+                    {path: 'account', component: AccountComponent},
+                    {path: 'account/password-reset', component: PasswordResetComponent},
                     {path: 'instances', component: InstanceOverviewComponent},
                     {path: 'instances/:id', component: InstanceDetailComponent},
                     {path: 'companies', component: CompanyOverviewComponent},
                     {path: 'companies/:id', component: CompanyDetailComponent},
                     {path: 'locations', component: LocationOverviewComponent},
                     {path: 'locations/:id', component: LocationDetailComponent},
+                    {path: 'admins', component: AdminOverviewComponent},
+                    {path: 'admins/:id', component: AdminDetailComponent},
                     {path: 'users', component: UserOverviewComponent},
                     {path: 'users/:id', component: UserDetailComponent},
+                    {path: 'orders', component: OrderOverviewComponent},
+                    {path: 'orders/:id', component: OrderDetailComponent},
                     {path: 'food-entrepreneurs', component: FoodEntrepreneurOverviewComponent},
                     {path: 'food-entrepreneurs/:id', component: FoodEntrepreneurDetailComponent},
                     {path: 'meals', component: MealOverviewComponent},

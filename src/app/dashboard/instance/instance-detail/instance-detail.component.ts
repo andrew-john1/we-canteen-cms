@@ -11,6 +11,11 @@ export class InstanceDetailComponent implements OnInit {
 
     id;
     instance = {};
+    priceOptions = {
+        align: 'left',
+        allowNegative: false,
+        prefix: '€ '
+    };
 
     constructor(private httpService: HttpService,
                 private activatedRoute: ActivatedRoute,
@@ -32,13 +37,15 @@ export class InstanceDetailComponent implements OnInit {
     }
 
     async save(instance) {
-        try {
-            let response;
+        if (typeof instance.price !== 'string') {
+            instance.price = instance.price.toFixed(2);
+        }
 
+        try {
             if (this.id === 'new') {
-                response = await this.httpService.postData('/instances', {instance});
+                await this.httpService.postData('/instances', {instance});
             } else {
-                response = await this.httpService.patchData('/instances', {instance});
+                await this.httpService.patchData('/instances', {instance});
             }
 
             this.router.navigate(['/dashboard/instances']);
