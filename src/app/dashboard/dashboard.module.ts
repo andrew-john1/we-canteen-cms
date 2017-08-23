@@ -27,13 +27,15 @@ import {AccountComponent} from './account/index/account.component';
 import {AdminOverviewComponent} from './admin/admin-overview/admin-overview.component';
 import {AdminDetailComponent} from './admin/admin-detail/admin-detail.component';
 import {PasswordResetComponent} from './account/password-reset/password-reset.component';
+import {ImageUploadModule} from 'angular2-image-upload';
 
 @NgModule({
     imports: [
         CommonModule,
         DashboardRoutingModule,
         FormsModule,
-        CurrencyMaskModule
+        CurrencyMaskModule,
+        ImageUploadModule.forRoot(),
     ],
     declarations: [
         DashboardComponent,

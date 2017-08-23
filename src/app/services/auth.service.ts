@@ -2,11 +2,12 @@ import {Injectable} from '@angular/core';
 
 import {Http} from '@angular/http';
 import 'rxjs/add/operator/toPromise';
+import {Config} from '../app.config';
 
 @Injectable()
 export class AuthService {
 
-    url = 'http://localhost:3000';
+    url = Config.url;
 
     constructor(private http: Http) {
     }
@@ -17,7 +18,9 @@ export class AuthService {
     redirectUrl: string;
 
     async login(user): Promise<any> {
-        const response = await this.http.post(`${this.url}/api/cms/admin/login`, {user})
+        console.log(this.url);
+
+        const response = await this.http.post(`${this.url}/admin/login`, {user})
             .toPromise();
 
         this.isLoggedIn = true;

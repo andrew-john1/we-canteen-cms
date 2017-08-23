@@ -2,7 +2,36 @@
 
 :host {
     @include layout;
+
+    .image-upload {
+        label {
+            display: inline-block;
+            @include border-radius(10px);
+            padding: 10px 15px;
+            text-transform: uppercase;
+            background-color: #b3d4fc;
+            cursor: pointer;
+        }
+
+        input {
+            display: none;
+        }
+    }
+
+    .image {
+        display: inline-block;
+        figure {
+            position: relative;
+            margin: 0;
+            height: 200px;
+            img {
+                height: 100%;
+            }
+        }
+    }
+
     table {
+        margin-bottom: 10px;
         td {
             vertical-align: top;
         }

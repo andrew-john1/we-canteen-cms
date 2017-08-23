@@ -1,21 +1,28 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HttpService} from '../../../services/http.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {EventService} from '../../../services/event.service';
 
 @Component({
     selector: 'app-user-detail',
     templateUrl: './user-detail.component.html',
     styleUrls: ['./user-detail.component.scss']
 })
-export class UserDetailComponent implements OnInit {
+export class UserDetailComponent implements OnInit, OnDestroy {
 
     id;
+    subscription: any;
     user: any = {};
     companies = [];
 
     constructor(private httpService: HttpService,
                 private activatedRoute: ActivatedRoute,
-                private router: Router) {
+                private router: Router,
+                private eventService: EventService) {
+        this.subscription = this.eventService.getEventChangeEmitter()
+            .subscribe(() => {
+                this.router.navigate(['/dashboard/users']);
+            });
     }
 
     async ngOnInit() {
@@ -63,6 +70,10 @@ export class UserDetailComponent implements OnInit {
         } catch (err) {
             console.log(err);
         }
+    }
+
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
     }
 
 }

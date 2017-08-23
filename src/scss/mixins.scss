@@ -19,16 +19,22 @@
     }
 
     .save {
-        position: absolute;
+        position: fixed;
         bottom: 50px;
         right: 50px;
     }
 
     .delete {
-        position: absolute;
+        position: fixed;
         bottom: 50px;
         right: 120px;
         background-color: lightcoral;
+    }
+
+    .delete-image {
+        position: absolute;
+        background-color: lightcoral;
+        right: 0;
     }
 }
 

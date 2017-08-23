@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HttpService} from '../../../services/http.service';
+import {Config} from '../../../app.config';
 
 @Component({
     selector: 'app-food-entrepreneur-detail',
@@ -10,7 +11,10 @@ import {HttpService} from '../../../services/http.service';
 export class FoodEntrepreneurDetailComponent implements OnInit {
 
     id;
+    image;
     foodEntrepreneur: any = {};
+    imageSelect = false;
+    url = Config.public;
 
     constructor(private httpService: HttpService,
                 private activatedRoute: ActivatedRoute,
@@ -25,18 +29,37 @@ export class FoodEntrepreneurDetailComponent implements OnInit {
         if (this.id !== 'new') {
             try {
                 this.foodEntrepreneur = await this.httpService.getData(`/foodEntrepreneurs/${this.id}`);
+                this.foodEntrepreneur.imageUrl = this.url + this.foodEntrepreneur.image.medium;
             } catch (err) {
                 console.log(err);
             }
         }
     }
 
+    async onChange(event) {
+        this.image = event.target.files[0];
+        this.imageSelect = true;
+    }
+
     async save(foodEntrepreneur) {
         try {
+            let response;
+
             if (this.id === 'new') {
-                await this.httpService.postData('/foodEntrepreneurs', {foodEntrepreneur});
+                response = await this.httpService.postData('/foodEntrepreneurs', {foodEntrepreneur});
+                console.log(response);
             } else {
                 await this.httpService.patchData('/foodEntrepreneurs', {foodEntrepreneur});
+            }
+
+            if (this.image) {
+                const id = foodEntrepreneur._id ? foodEntrepreneur._id : response._id;
+                const formData = new FormData();
+
+                formData.append('id', id);
+                formData.append('file', this.image);
+
+                await this.httpService.postData(`/foodEntrepreneurs/image`, formData);
             }
 
             this.router.navigate(['/dashboard/food-entrepreneurs']);
@@ -49,6 +72,15 @@ export class FoodEntrepreneurDetailComponent implements OnInit {
         try {
             await this.httpService.deleteData(`/foodEntrepreneurs/${this.id}`);
             this.router.navigate(['/dashboard/food-entrepreneurs']);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+    async deleteImage() {
+        try {
+            await this.httpService.deleteData(`/foodEntrepreneurs/image/${this.id}`);
+            delete this.foodEntrepreneur.image;
         } catch (err) {
             console.log(err);
         }

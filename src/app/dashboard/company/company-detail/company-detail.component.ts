@@ -1,20 +1,27 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HttpService} from '../../../services/http.service';
+import {EventService} from '../../../services/event.service';
 
 @Component({
     selector: 'app-company-detail',
     templateUrl: './company-detail.component.html',
     styleUrls: ['./company-detail.component.scss']
 })
-export class CompanyDetailComponent implements OnInit {
+export class CompanyDetailComponent implements OnInit, OnDestroy {
 
     id;
+    subscription: any;
     company: any = {};
 
     constructor(private httpService: HttpService,
                 private activatedRoute: ActivatedRoute,
-                private router: Router) {
+                private router: Router,
+                private eventService: EventService) {
+        this.subscription = this.eventService.getEventChangeEmitter()
+            .subscribe(() => {
+                this.router.navigate(['/dashboard/companies']);
+            });
     }
 
     async ngOnInit() {
@@ -52,6 +59,10 @@ export class CompanyDetailComponent implements OnInit {
         } catch (err) {
             console.log(err);
         }
+    }
+
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
     }
 
 }

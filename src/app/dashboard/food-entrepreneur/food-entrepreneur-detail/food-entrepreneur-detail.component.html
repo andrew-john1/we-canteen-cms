@@ -1,6 +1,3 @@
-<div class="image-up">
-    
-</div>
 <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
     <thead>
     </thead>
@@ -34,6 +31,31 @@
         <td class="mdl-data-table__cell--non-numeric">
             <textarea [(ngModel)]="foodEntrepreneur.description"
                       name="description"></textarea>
+        </td>
+    </tr>
+    <tr>
+        <td class="mdl-data-table__cell--non-numeric">Image</td>
+        <td class="mdl-data-table__cell--non-numeric">
+            <div class="image-upload"
+                 *ngIf="!foodEntrepreneur.image">
+                <label for="image">{{imageSelect ? 'Image Selected' : 'Select Image'}}</label>
+                <input type="file"
+                       id="image"
+                       (change)="onChange($event)"
+                       accept="image/*" >
+            </div>
+            <div class="image"
+                 *ngIf="foodEntrepreneur.image">
+                <figure>
+                    <button
+                        (click)="deleteImage()"
+                        class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored delete-image">
+                        <i class="material-icons">delete</i>
+                    </button>
+                    <img [src]="foodEntrepreneur.imageUrl"
+                         alt="Afbeelding {{foodEntrepreneur.name}}">
+                </figure>
+            </div>
         </td>
     </tr>
     </tbody>

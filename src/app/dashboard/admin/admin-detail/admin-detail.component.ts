@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HttpService} from '../../../services/http.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
@@ -55,12 +55,12 @@ export class AdminDetailComponent implements OnInit {
 
         try {
             if (this.id === 'new') {
-                await this.httpService.postData('/users', {user});
+                await this.httpService.postData('/admins', {user});
             } else {
-                await this.httpService.patchData('/users', {user});
+                await this.httpService.patchData('/admins', {user});
             }
 
-            this.router.navigate(['/dashboard/users']);
+            this.router.navigate(['/dashboard/admins']);
         } catch (err) {
             console.log(err);
         }
@@ -68,8 +68,8 @@ export class AdminDetailComponent implements OnInit {
 
     async delete() {
         try {
-            await this.httpService.deleteData(`/users/${this.id}`);
-            this.router.navigate(['/dashboard/users']);
+            await this.httpService.deleteData(`/admins/${this.id}`);
+            this.router.navigate(['/dashboard/admins']);
         } catch (err) {
             console.log(err);
         }

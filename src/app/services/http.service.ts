@@ -1,12 +1,12 @@
 import {Injectable} from '@angular/core';
 import {Headers, Http} from '@angular/http';
-import {appConfig} from '../app.config';
 import 'rxjs/add/operator/toPromise';
+import {Config} from '../app.config';
 
 @Injectable()
 export class HttpService {
 
-    url = appConfig.url;
+    url = Config.url;
 
     constructor(private http: Http) {
     }
