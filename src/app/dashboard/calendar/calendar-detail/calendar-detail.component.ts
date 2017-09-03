@@ -157,7 +157,7 @@ export class CalendarDetailComponent implements OnInit, OnDestroy {
     }
 
     dayClicked({day: {date}}) {
-        if (this.showDialog || moment(date) < moment()) {
+        if (this.showDialog) {
             return;
         }
 
@@ -179,6 +179,7 @@ export class CalendarDetailComponent implements OnInit, OnDestroy {
 
                 const color = this.foodEntrepreneursObject[event.foodEntrepreneurId].color;
 
+                event.draggable = true;
                 event.start = moment(event.start);
                 event.color = {
                     primary: color.primary,

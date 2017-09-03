@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Config} from '../../../app.config';
 import {HttpService} from '../../../services/http.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {FormGroup, FormControl} from '@angular/forms';
 
 @Component({
     selector: 'app-meal-detail',
@@ -12,6 +13,7 @@ export class MealDetailComponent implements OnInit {
     id;
     image;
     meal: any = {};
+    form: FormGroup;
     foodEntrepreneurs = [];
     imageSelect = false;
     url = Config.public;
@@ -27,9 +29,18 @@ export class MealDetailComponent implements OnInit {
             this.id = params['id'];
         });
 
+        this.form = new FormGroup({});
+        this.form.addControl('selectFoodEntrepreneur', new FormControl(''));
+
         try {
             if (this.userRights > 1) {
-                this.foodEntrepreneurs = await this.httpService.getData('/foodEntrepreneur');
+                const foodEntrepreneurs = await this.httpService.getData('/foodEntrepreneur');
+                this.foodEntrepreneurs = foodEntrepreneurs.map(foodEntrepreneur => {
+                    foodEntrepreneur.value = foodEntrepreneur._id;
+                    foodEntrepreneur.label = foodEntrepreneur.name;
+
+                    return foodEntrepreneur;
+                });
             }
 
             if (this.id !== 'new') {

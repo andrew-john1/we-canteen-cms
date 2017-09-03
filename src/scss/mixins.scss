@@ -46,7 +46,7 @@
     font-size: 13px;
     font-weight: 400;
     letter-spacing: 0;
-    border: none;
+    border: 1px solid lightgrey;
     padding: 5px;
     font-family: 'Roboto', 'Helvetica', sans-serif;
     outline: none;
@@ -55,7 +55,7 @@
 @mixin textarea() {
     width: 100%;
     height: 200px;
-    border: none;
+    border: 1px solid lightgrey;
     outline: none;
     padding: 10px;
     font-size: 13px;

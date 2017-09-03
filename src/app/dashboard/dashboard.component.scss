@@ -19,6 +19,12 @@
         }
     }
 
+    nav {
+        a {
+            cursor: pointer;
+        }
+    }
+
     .truncate {
         width: 200px;
         white-space: nowrap;
