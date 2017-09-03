@@ -8,7 +8,7 @@ import {Subject} from 'rxjs/Subject';
 @Component({
     selector: 'app-calendar-detail',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    styleUrls: ['./calendar-detail.component.scss', '../../../../../node_modules/bootstrap/dist/css/bootstrap.css'],
+    styleUrls: ['./calendar-detail.component.scss'],
     templateUrl: './calendar-detail.component.html'
 })
 
@@ -197,7 +197,7 @@ export class CalendarDetailComponent implements OnInit, OnDestroy {
 
     async delete(id) {
         try {
-            await this.httpService.deleteData(`/calendarEvent/${id}`);
+            await this.httpService.deleteData(`/calendarEvents/${id}`);
 
             this.events.forEach((event, index) => {
                 if (event._id === id) {
