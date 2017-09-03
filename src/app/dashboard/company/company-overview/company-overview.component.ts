@@ -27,10 +27,10 @@ export class CompanyOverviewComponent implements OnInit, OnDestroy {
 
     async getData() {
         try {
-            this.companies = await this.httpServer.getData('/companies');
+            this.companies = await this.httpServer.getData('/company');
 
             const usersPromise = this.companies.reduce((total, company) => {
-                total.push(this.httpServer.getData(`/users/count/${company._id}`));
+                total.push(this.httpServer.getData(`/user/count/${company._id}`));
                 return total;
             }, []);
 

@@ -24,6 +24,7 @@ import {AccountComponent} from './account/index/account.component';
 import {AdminOverviewComponent} from './admin/admin-overview/admin-overview.component';
 import {AdminDetailComponent} from './admin/admin-detail/admin-detail.component';
 import {PasswordResetComponent} from './account/password-reset/password-reset.component';
+import {AboutComponent} from './about/about.component';
 
 const dashboardRoutes: Routes = [
     {
@@ -37,6 +38,7 @@ const dashboardRoutes: Routes = [
                 children: [
                     {path: 'account', component: AccountComponent},
                     {path: 'account/password-reset', component: PasswordResetComponent},
+                    {path: 'about', component: AboutComponent},
                     {path: 'instances', component: InstanceOverviewComponent},
                     {path: 'instances/:id', component: InstanceDetailComponent},
                     {path: 'companies', component: CompanyOverviewComponent},

@@ -26,7 +26,7 @@ export class LocationOverviewComponent implements OnInit, OnDestroy {
 
     async getData() {
         try {
-            this.locations = await this.httpServer.getData('/locations');
+            this.locations = await this.httpServer.getData('/location');
         } catch (err) {
             console.log(err);
         }

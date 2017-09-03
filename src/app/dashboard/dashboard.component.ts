@@ -98,8 +98,19 @@ export class DashboardComponent implements OnInit {
         try {
             this.user = await this.httpService.getData('/admin/token');
 
+            if (this.user.foodEntrepreneurId) {
+                const item = {
+                    name: 'About',
+                    url: '/dashboard/about',
+                    icon: 'description',
+                    userRights: 1
+                };
+                this.navigation.splice(1, 0, item);
+                this.navigationObject[item.url] = item;
+            }
+
             if (this.user.userRights > 2) {
-                this.instances = await this.httpService.getData('/instances');
+                this.instances = await this.httpService.getData('/instance');
 
                 this.instances.forEach(instance => {
                     if (instance._id === this.user.instanceId) {
@@ -125,7 +136,7 @@ export class DashboardComponent implements OnInit {
         this.instance = instance;
         this.showMenu = !this.showMenu;
         try {
-            const response = await this.httpService.postData('/admin/instance', {instance});
+            const response = await this.httpService.getData(`/admin/instance/${instance._id}`);
             localStorage.setItem('token', response.token);
         } catch (err) {
             console.log(err);

@@ -34,6 +34,22 @@
         </td>
     </tr>
     <tr>
+        <td class="mdl-data-table__cell--non-numeric">Primary Color</td>
+        <td>
+            <input [(colorPicker)]="foodEntrepreneur.color.primary"
+                   [style.background]="foodEntrepreneur.color.primary"
+                   [cpPosition]="'bottom'"/>
+        </td>
+    </tr>
+    <tr>
+        <td class="mdl-data-table__cell--non-numeric">Secondary Color</td>
+        <td>
+            <input [(colorPicker)]="foodEntrepreneur.color.secondary"
+                   [style.background]="foodEntrepreneur.color.secondary"
+                   [cpPosition]="'bottom'"/>
+        </td>
+    </tr>
+    <tr>
         <td class="mdl-data-table__cell--non-numeric">Image</td>
         <td class="mdl-data-table__cell--non-numeric">
             <div class="image-upload"

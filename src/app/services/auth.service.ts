@@ -18,13 +18,15 @@ export class AuthService {
     redirectUrl: string;
 
     async login(user): Promise<any> {
-        console.log(this.url);
+        try {
+            const response = await this.http.post(`${this.url}/admin/login`, {user})
+                .toPromise();
 
-        const response = await this.http.post(`${this.url}/admin/login`, {user})
-            .toPromise();
-
-        this.isLoggedIn = true;
-        return response.json() || {};
+            this.isLoggedIn = true;
+            return response.json() || {};
+        } catch (err) {
+            console.log(err);
+        }
     }
 
     logout(): void {

@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HttpService} from '../../../services/http.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {FormGroup, FormControl} from '@angular/forms';
 
 @Component({
     selector: 'app-admin-detail',
@@ -10,10 +11,11 @@ import {ActivatedRoute, Router} from '@angular/router';
 export class AdminDetailComponent implements OnInit {
 
     id;
+    form: FormGroup;
     user: any = {};
     foodEntrepreneur = {};
     foodEntrepreneurs = [];
-    maxValue = localStorage.getItem('userRights');
+    maxValue = parseInt(localStorage.getItem('userRights'));
 
     constructor(private httpService: HttpService,
                 private activatedRoute: ActivatedRoute,
@@ -25,20 +27,23 @@ export class AdminDetailComponent implements OnInit {
             this.id = params['id'];
         });
 
+        this.form = new FormGroup({});
+        this.form.addControl('selectFoodEntrepreneur', new FormControl(''));
+
         try {
             if (this.id !== 'new') {
-                this.user = await this.httpService.getData(`/admins/${this.id}`);
+                this.user = await this.httpService.getData(`/admin/${this.id}`);
             }
 
             if (this.user.userRights > 1) {
-                this.foodEntrepreneurs = await this.httpService.getData('/foodEntrepreneurs');
-                this.foodEntrepreneurs.unshift({_id: '', name: 'Not a Food Entrepreneur'});
-            }
+                const foodEntrepreneurs = await this.httpService.getData('/foodEntrepreneur');
 
-            if (this.user.foodEntrepreneurId) {
-                this.foodEntrepreneur = await this.httpService.getData(`/foodEntrepreneurs/${this.user.foodEntrepreneurId}`);
-            } else {
-                this.user.foodEntrepreneurId = '';
+                this.foodEntrepreneurs = foodEntrepreneurs.map(foodEntrepreneur => {
+                    foodEntrepreneur.value = foodEntrepreneur._id;
+                    foodEntrepreneur.label = foodEntrepreneur.name;
+
+                    return foodEntrepreneur;
+                });
             }
         } catch (err) {
              console.log(err);
@@ -46,7 +51,7 @@ export class AdminDetailComponent implements OnInit {
     }
 
     async save(user) {
-        const userRights = parseInt(this.maxValue);
+        const userRights = this.maxValue;
 
         if (user.userRights > userRights) {
             alert('cannot create user with higher user rights');
@@ -55,9 +60,14 @@ export class AdminDetailComponent implements OnInit {
 
         try {
             if (this.id === 'new') {
-                await this.httpService.postData('/admins', {user});
+                await this.httpService.postData('/admin', {user});
             } else {
-                await this.httpService.patchData('/admins', {user});
+                await this.httpService.patchData('/admin', {user});
+            }
+
+            if (user._id === localStorage.getItem('userId')) {
+                const response = await this.httpService.getData('/admin/generateToken');
+                localStorage.setItem('token', response.token);
             }
 
             this.router.navigate(['/dashboard/admins']);
@@ -68,7 +78,7 @@ export class AdminDetailComponent implements OnInit {
 
     async delete() {
         try {
-            await this.httpService.deleteData(`/admins/${this.id}`);
+            await this.httpService.deleteData(`/admin/${this.id}`);
             this.router.navigate(['/dashboard/admins']);
         } catch (err) {
             console.log(err);

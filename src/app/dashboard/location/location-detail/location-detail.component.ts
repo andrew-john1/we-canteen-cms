@@ -31,7 +31,7 @@ export class LocationDetailComponent implements OnInit, OnDestroy {
 
         if (this.id !== 'new') {
             try {
-                this.location = await this.httpService.getData(`/locations/${this.id}`);
+                this.location = await this.httpService.getData(`/location/${this.id}`);
             } catch (err) {
                 console.log(err);
             }
@@ -41,9 +41,9 @@ export class LocationDetailComponent implements OnInit, OnDestroy {
     async save(location) {
         try {
             if (this.id === 'new') {
-                await this.httpService.postData('/locations', {location});
+                await this.httpService.postData('/location', {location});
             } else {
-                await this.httpService.patchData('/locations', {location});
+                await this.httpService.patchData('/location', {location});
             }
 
             this.router.navigate(['/dashboard/locations']);
@@ -54,7 +54,7 @@ export class LocationDetailComponent implements OnInit, OnDestroy {
 
     async delete() {
         try {
-            await this.httpService.deleteData(`/locations/${this.id}`);
+            await this.httpService.deleteData(`/location/${this.id}`);
             this.router.navigate(['/dashboard/locations']);
         } catch (err) {
             console.log(err);

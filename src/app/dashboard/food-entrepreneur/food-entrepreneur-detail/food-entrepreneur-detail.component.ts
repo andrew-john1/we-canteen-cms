@@ -12,7 +12,9 @@ export class FoodEntrepreneurDetailComponent implements OnInit {
 
     id;
     image;
-    foodEntrepreneur: any = {};
+    foodEntrepreneur: any = {
+        color: {}
+    };
     imageSelect = false;
     url = Config.public;
 
@@ -26,10 +28,18 @@ export class FoodEntrepreneurDetailComponent implements OnInit {
             this.id = params['id'];
         });
 
-        if (this.id !== 'new') {
+        if (this.id === 'new') {
+            this.foodEntrepreneur.color = {
+                primary: '#09218b',
+                secondary: '#fff'
+            }
+        } else {
             try {
-                this.foodEntrepreneur = await this.httpService.getData(`/foodEntrepreneurs/${this.id}`);
-                this.foodEntrepreneur.imageUrl = this.url + this.foodEntrepreneur.image.medium;
+                this.foodEntrepreneur = await this.httpService.getData(`/foodEntrepreneur/${this.id}`);
+
+                if (this.foodEntrepreneur.image) {
+                    this.foodEntrepreneur.imageUrl = this.url + this.foodEntrepreneur.image.medium;
+                }
             } catch (err) {
                 console.log(err);
             }
@@ -46,10 +56,10 @@ export class FoodEntrepreneurDetailComponent implements OnInit {
             let response;
 
             if (this.id === 'new') {
-                response = await this.httpService.postData('/foodEntrepreneurs', {foodEntrepreneur});
+                response = await this.httpService.postData('/foodEntrepreneur', {foodEntrepreneur});
                 console.log(response);
             } else {
-                await this.httpService.patchData('/foodEntrepreneurs', {foodEntrepreneur});
+                await this.httpService.patchData('/foodEntrepreneur', {foodEntrepreneur});
             }
 
             if (this.image) {
@@ -59,7 +69,7 @@ export class FoodEntrepreneurDetailComponent implements OnInit {
                 formData.append('id', id);
                 formData.append('file', this.image);
 
-                await this.httpService.postData(`/foodEntrepreneurs/image`, formData);
+                await this.httpService.postData(`/foodEntrepreneur/image`, formData);
             }
 
             this.router.navigate(['/dashboard/food-entrepreneurs']);
@@ -70,7 +80,7 @@ export class FoodEntrepreneurDetailComponent implements OnInit {
 
     async delete() {
         try {
-            await this.httpService.deleteData(`/foodEntrepreneurs/${this.id}`);
+            await this.httpService.deleteData(`/foodEntrepreneur/${this.id}`);
             this.router.navigate(['/dashboard/food-entrepreneurs']);
         } catch (err) {
             console.log(err);
@@ -79,7 +89,7 @@ export class FoodEntrepreneurDetailComponent implements OnInit {
 
     async deleteImage() {
         try {
-            await this.httpService.deleteData(`/foodEntrepreneurs/image/${this.id}`);
+            await this.httpService.deleteData(`/foodEntrepreneur/image/${this.id}`);
             delete this.foodEntrepreneur.image;
         } catch (err) {
             console.log(err);

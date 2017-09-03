@@ -31,8 +31,8 @@ export class UserOverviewComponent implements OnInit, OnDestroy {
                 users,
                 companies
             ] = await Promise.all([
-                this.httpServer.getData('/users'),
-                this.httpServer.getData('/companies')
+                this.httpServer.getData('/user'),
+                this.httpServer.getData('/company')
             ]);
 
             this.users = users;

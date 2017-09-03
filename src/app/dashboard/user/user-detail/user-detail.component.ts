@@ -30,10 +30,10 @@ export class UserDetailComponent implements OnInit, OnDestroy {
             this.id = params['id'];
         });
 
-        const promises = [this.httpService.getData(`/companies/`)];
+        const promises = [this.httpService.getData('/company')];
 
         if (this.id !== 'new') {
-            promises.push(this.httpService.getData(`/users/${this.id}`));
+            promises.push(this.httpService.getData(`/user/${this.id}`));
         }
 
         const [
@@ -52,9 +52,9 @@ export class UserDetailComponent implements OnInit, OnDestroy {
     async save(user) {
         try {
             if (this.id === 'new') {
-                await this.httpService.postData('/users', {user});
+                await this.httpService.postData('/user', {user});
             } else {
-                await this.httpService.patchData('/users', {user});
+                await this.httpService.patchData('/user', {user});
             }
 
             this.router.navigate(['/dashboard/users']);
@@ -65,7 +65,7 @@ export class UserDetailComponent implements OnInit, OnDestroy {
 
     async delete() {
         try {
-            await this.httpService.deleteData(`/users/${this.id}`);
+            await this.httpService.deleteData(`/user/${this.id}`);
             this.router.navigate(['/dashboard/users']);
         } catch (err) {
             console.log(err);

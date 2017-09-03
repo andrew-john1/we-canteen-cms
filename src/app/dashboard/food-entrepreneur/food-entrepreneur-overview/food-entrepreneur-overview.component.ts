@@ -10,12 +10,12 @@ export class FoodEntrepreneurOverviewComponent implements OnInit {
 
     foodEntrepreneurs = [];
 
-    constructor(private httpServer: HttpService) {
+    constructor(private httpService: HttpService) {
     }
 
     async ngOnInit() {
         try {
-            this.foodEntrepreneurs = await this.httpServer.getData('/foodEntrepreneurs');
+            this.foodEntrepreneurs = await this.httpService.getData('/foodEntrepreneur');
         } catch (err) {
             console.log(err);
         }

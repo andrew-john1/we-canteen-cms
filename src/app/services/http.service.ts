@@ -12,42 +12,58 @@ export class HttpService {
     }
 
     async getData(url): Promise<any> {
-        const token = localStorage.getItem('token');
-        const headers = new Headers({'token': token});
+        try {
+            const token = localStorage.getItem('token');
+            const headers = new Headers({'token': token});
 
-        const response = await this.http.get(`${this.url}${url}`, {headers})
-            .toPromise();
+            const response = await this.http.get(`${this.url}${url}`, {headers})
+                .toPromise();
 
-        return response.json() || {};
+            return response.json() || {};
+        } catch (err) {
+            console.log(err);
+        }
     }
 
     async postData(url, data): Promise<any> {
-        const token = localStorage.getItem('token');
-        const headers = new Headers({'token': token});
+        try {
+            const token = localStorage.getItem('token');
+            const headers = new Headers({'token': token});
 
-        const response = await this.http.post(`${this.url}${url}`, data, {headers})
-            .toPromise();
+            const response = await this.http.post(`${this.url}${url}`, data, {headers})
+                .toPromise();
 
-        return response.json() || {};
+            return response.json() || {};
+        } catch (err) {
+            console.log(err);
+        }
     }
 
     async patchData(url, data): Promise<any> {
-        const token = localStorage.getItem('token');
-        const headers = new Headers({'token': token});
+        try {
+            const token = localStorage.getItem('token');
+            const headers = new Headers({'token': token});
 
-        const response = await this.http.patch(`${this.url}${url}`, data, {headers})
-            .toPromise();
+            const response = await this.http.patch(`${this.url}${url}`, data, {headers})
+                .toPromise();
 
-        return response.json() || {};
+            return response.json() || {};
+        } catch (err) {
+            console.log(err);
+        }
     }
 
     async deleteData(url): Promise<any> {
-        const token = localStorage.getItem('token');
-        const headers = new Headers({'token': token});
+        try {
+            const token = localStorage.getItem('token');
+            const headers = new Headers({'token': token});
 
-        const response = await this.http.delete(`${this.url}${url}`, {headers})
-            .toPromise();
+            const response = await this.http.delete(`${this.url}${url}`, {headers})
+                .toPromise();
 
-        return response.json() || {};
+            return response.json() || {};
+        } catch (err) {
+            console.log(err);
+        }
     }
 }

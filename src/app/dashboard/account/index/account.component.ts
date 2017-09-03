@@ -11,7 +11,6 @@ export class AccountComponent implements OnInit {
 
     user: any = {};
     foodEntrepreneur = {};
-    foodEntrepreneurs = [];
     userId = localStorage.getItem('userId');
 
     constructor(private httpService: HttpService,
@@ -20,18 +19,7 @@ export class AccountComponent implements OnInit {
 
     async ngOnInit() {
         try {
-            this.user = await this.httpService.getData(`/admins/${this.userId}`);
-
-            if (this.user.userRights > 1) {
-                this.foodEntrepreneurs = await this.httpService.getData('/foodEntrepreneurs');
-                this.foodEntrepreneurs.unshift({_id: '', name: 'Not a Food Entrepreneur'});
-            }
-
-            if (this.user.foodEntrepreneurId) {
-                this.foodEntrepreneur = await this.httpService.getData(`/foodEntrepreneurs/${this.user.foodEntrepreneurId}`);
-            } else {
-                this.user.foodEntrepreneurId = '';
-            }
+            this.user = await this.httpService.getData(`/admin/${this.userId}`);
         } catch (err) {
             console.log(err);
         }
@@ -42,10 +30,8 @@ export class AccountComponent implements OnInit {
     }
 
     async save(user) {
-        console.log(user);
         try {
-            await this.httpService.patchData('/users', {user});
-            console.log('user saved');
+            await this.httpService.patchData('/admin', {user});
         } catch (err) {
             console.log(err);
         }

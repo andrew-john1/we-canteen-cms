@@ -1,0 +1,29 @@
+@import '../../../../scss/mixins';
+
+:host {
+    @include layout;
+
+    .image-upload {
+        @include image-upload;
+    }
+
+    .image {
+        @include image;
+    }
+
+    table {
+        margin-bottom: 10px;
+        td {
+            border-left: 1px solid lightgrey;
+            vertical-align: top;
+        }
+
+        input {
+            @include input;
+        }
+
+        textarea {
+            @include textarea;
+        }
+    }
+}

@@ -4,6 +4,7 @@
     .demo-drawer-header {
         height: auto;
     }
+
     .mdl-layout .demo-drawer header ul {
         position: absolute;
         top: 50px;
@@ -17,6 +18,7 @@
             @include border-radius(10px);
         }
     }
+
     .truncate {
         width: 200px;
         white-space: nowrap;

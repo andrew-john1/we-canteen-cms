@@ -15,8 +15,7 @@ import {UserOverviewComponent} from './user/user-overview/user-overview.componen
 import {UserDetailComponent} from './user/user-detail/user-detail.component';
 import {InstanceOverviewComponent} from './instance/instance-overview/instance-overview.component';
 import {InstanceDetailComponent} from './instance/instance-detail/instance-detail.component';
-import {FormsModule} from '@angular/forms';
-import {CalendarComponent} from 'ap-angular2-fullcalendar';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {DashboardComponent} from './dashboard.component';
 import {DashboardRoutingModule} from './dashboard-routing.module';
 import {EventService} from '../services/event.service';
@@ -27,7 +26,13 @@ import {AccountComponent} from './account/index/account.component';
 import {AdminOverviewComponent} from './admin/admin-overview/admin-overview.component';
 import {AdminDetailComponent} from './admin/admin-detail/admin-detail.component';
 import {PasswordResetComponent} from './account/password-reset/password-reset.component';
-import {ImageUploadModule} from 'angular2-image-upload';
+import {AboutComponent} from './about/about.component';
+
+import {CalendarModule} from 'angular-calendar';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {CalendarUtilsModule} from './calendar/calendar-detail/calendar-utils/module';
+import {SelectModule} from 'ng-select';
+import {ColorPickerModule} from 'ngx-color-picker';
 
 @NgModule({
     imports: [
@@ -35,11 +40,17 @@ import {ImageUploadModule} from 'angular2-image-upload';
         DashboardRoutingModule,
         FormsModule,
         CurrencyMaskModule,
-        ImageUploadModule.forRoot(),
+        CalendarModule.forRoot(),
+        BrowserAnimationsModule,
+        CalendarUtilsModule,
+        ReactiveFormsModule,
+        SelectModule,
+        ColorPickerModule
     ],
     declarations: [
         DashboardComponent,
         AccountComponent,
+        AboutComponent,
         PasswordResetComponent,
         InstanceOverviewComponent,
         InstanceDetailComponent,
@@ -57,7 +68,6 @@ import {ImageUploadModule} from 'angular2-image-upload';
         AdminDetailComponent,
         UserOverviewComponent,
         UserDetailComponent,
-        CalendarComponent,
         OrderDetailComponent,
         OrderOverviewComponent
     ],

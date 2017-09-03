@@ -1,3 +1,67 @@
-<p>
-  calendar-detail works!
-</p>
+<app-calendar-header
+    [(view)]="view"
+    [(viewDate)]="viewDate"
+    (viewDateChange)="viewDateChange($event)">
+</app-calendar-header>
+
+<div [ngSwitch]="view">
+    <mwl-calendar-month-view
+        *ngSwitchCase="'month'"
+        [viewDate]="viewDate"
+        [events]="events"
+        [weekStartsOn]="1"
+        (eventClicked)="eventClicked($event)"
+        (dayClicked)="dayClicked($event)"
+        (eventTimesChanged)="eventTimesChanged($event)"
+        [refresh]="refresh">
+    </mwl-calendar-month-view>
+    <mwl-calendar-week-view
+        *ngSwitchCase="'week'"
+        [viewDate]="viewDate"
+        [events]="events"
+        [weekStartsOn]="1"
+        (eventClicked)="eventClicked($event)"
+        (eventTimesChanged)="eventTimesChanged($event)"
+        [refresh]="refresh">
+    </mwl-calendar-week-view>
+</div>
+
+<dialog class="mdl-dialog" *ngIf="showDialog">
+    <i class="mdl-color-text--blue-grey-400 material-icons"
+       role="presentation"
+       (click)="close()">close</i>
+    <h4 class="mdl-dialog__title">{{(event._id) ? 'Edit' : 'Add'}} take away meal</h4>
+    <form class="mdl-dialog__content"
+          [formGroup]="form">
+        <label for="foodEntrepreneur">Food Entrepreneur</label>
+        <ng-select
+            id="foodEntrepreneur"
+            [(ngModel)]="event.foodEntrepreneurId"
+            [options]="foodEntrepreneurs"
+            placeholder="Select a food entrepreneur"
+            formControlName="selectFoodEntrepreneur"
+            [allowClear]="true"
+            (selected)="selectFoodEntrepreneur($event)"
+            (deselected)="deselectFoodEntrepreneur($event)">
+        </ng-select>
+        <label for="meal">Meal</label>
+        <ng-select
+            id="meal"
+            [(ngModel)]="event.mealId"
+            [options]="meals"
+            placeholder="Select a meal"
+            formControlName="selectMeal"
+            [allowClear]="true"
+            (selected)="selectMeal($event)">
+        </ng-select>
+    </form>
+    <div class="mdl-dialog__actions">
+        <button type="button"
+                class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored"
+                (click)="save(event)">Save</button>
+        <button type="button"
+                *ngIf="event._id"
+                class="mdl-button close"
+                (click)="delete(event._id)">delete</button>
+    </div>
+</dialog>

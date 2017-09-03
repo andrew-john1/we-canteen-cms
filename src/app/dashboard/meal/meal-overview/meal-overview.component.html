@@ -1,3 +1,21 @@
-<p>
-  meal-overview works!
-</p>
+<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+    <thead>
+    <tr>
+        <th class="mdl-data-table__cell--non-numeric">Name</th>
+        <th class="mdl-data-table__cell--non-numeric">Food Entrepreneur</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let meal of meals"
+        routerLink="./{{meal._id}}"
+        routerLinkActive="active">
+        <td class="mdl-data-table__cell--non-numeric">{{meal.name}}</td>
+        <td class="mdl-data-table__cell--non-numeric">{{foodEntrepreneursObject[meal.foodEntrepreneurId]?.name}}</td>
+    </tr>
+    </tbody>
+</table>
+<button routerLink="./new"
+        routerLinkActive="active"
+        class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored save">
+    <i class="material-icons">add</i>
+</button>

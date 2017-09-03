@@ -17,15 +17,15 @@ export class InstanceOverviewComponent implements OnInit {
 
     async ngOnInit() {
         try {
-            this.instances = await this.httpServer.getData('/instances');
+            this.instances = await this.httpServer.getData('/instance');
 
             const companyPromises = this.instances.reduce((total, instance) => {
-                total.push(this.httpServer.getData(`/companies/count/${instance._id}`));
+                total.push(this.httpServer.getData(`/company/count/${instance._id}`));
                 return total;
             }, []);
 
             const locationPromises = this.instances.reduce((total, instance) => {
-                total.push(this.httpServer.getData(`/locations/count/${instance._id}`));
+                total.push(this.httpServer.getData(`/location/count/${instance._id}`));
                 return total;
             }, []);
 

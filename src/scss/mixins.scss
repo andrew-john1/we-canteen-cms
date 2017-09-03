@@ -12,9 +12,13 @@
     table {
         width: 100%;
 
-        input {
-            float: left;
-            width: 100%;
+        tbody {
+            tr td {
+                input {
+                    float: left;
+                    width: 100%;
+                }
+            }
         }
     }
 
@@ -39,18 +43,54 @@
 }
 
 @mixin input() {
-    border: 0;
     font-size: 13px;
     font-weight: 400;
     letter-spacing: 0;
-    padding: 0;
+    border: none;
+    padding: 5px;
     font-family: 'Roboto', 'Helvetica', sans-serif;
-    background-color: transparent;
     outline: none;
+}
+
+@mixin textarea() {
+    width: 100%;
+    height: 200px;
+    border: none;
+    outline: none;
+    padding: 10px;
+    font-size: 13px;
+    font-weight: 400;
 }
 
 @mixin border-radius($border) {
     -webkit-border-radius: $border;
     -moz-border-radius: $border;
     border-radius: $border;
+}
+
+@mixin image-upload() {
+    label {
+        display: inline-block;
+        @include border-radius(10px);
+        padding: 10px 15px;
+        text-transform: uppercase;
+        background-color: #00BCD4;
+        cursor: pointer;
+    }
+
+    input {
+        display: none;
+    }
+}
+
+@mixin image() {
+    display: inline-block;
+    figure {
+        position: relative;
+        margin: 0;
+        height: 200px;
+        img {
+            height: 100%;
+        }
+    }
 }

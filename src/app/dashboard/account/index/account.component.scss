@@ -2,8 +2,12 @@
 
 :host {
     @include layout;
-    table input {
-        @include input;
+    table tbody tr td {
+        border-left: 1px solid lightgrey;
+
+        input {
+            @include input;
+        }
     }
     .reset-password {
         margin-top: 20px;

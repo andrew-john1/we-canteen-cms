@@ -36,17 +36,18 @@
                    [(ngModel)]="user.userRights">
         </td>
     </tr>
-    <tr *ngIf="user.foodEntrepreneurId && user.userRights === 1">
+    <tr>
         <td class="mdl-data-table__cell--non-numeric">Food Entrepeneur</td>
-        <td class="mdl-data-table__cell--non-numeric">{{foodEntrepreneur.name}}</td>
-    </tr>
-    <tr *ngIf="user.userRights > 1">
-        <td class="mdl-data-table__cell--non-numeric">Food Entrepeneur</td>
-        <td class="mdl-data-table__cell--non-numeric">
-            <select [(ngModel)]="user.foodEntrepreneurId">
-                <option *ngFor="let foodEntrepreneur of foodEntrepreneurs"
-                        [ngValue]="foodEntrepreneur._id">{{foodEntrepreneur.name}}</option>
-            </select>
+        <td class="mdl-data-table__cell--non-numeric"
+            [formGroup]="form">
+            <ng-select
+                id="foodEntrepreneur"
+                [(ngModel)]="user.foodEntrepreneurId"
+                [options]="foodEntrepreneurs"
+                placeholder="Select a food entrepreneur"
+                formControlName="selectFoodEntrepreneur"
+                [allowClear]="true">
+            </ng-select>
         </td>
     </tr>
     </tbody>

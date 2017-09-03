@@ -31,7 +31,7 @@ export class CompanyDetailComponent implements OnInit, OnDestroy {
 
         if (this.id !== 'new') {
             try {
-                this.company = await this.httpService.getData(`/companies/${this.id}`);
+                this.company = await this.httpService.getData(`/company/${this.id}`);
             } catch (err) {
                 console.log(err);
             }
@@ -41,9 +41,9 @@ export class CompanyDetailComponent implements OnInit, OnDestroy {
     async save(company) {
         try {
             if (this.id === 'new') {
-                await this.httpService.postData('/companies', {company});
+                await this.httpService.postData('/company', {company});
             } else {
-                await this.httpService.patchData('/companies', {company});
+                await this.httpService.patchData('/company', {company});
             }
 
             this.router.navigate(['/dashboard/companies']);
@@ -54,7 +54,7 @@ export class CompanyDetailComponent implements OnInit, OnDestroy {
 
     async delete() {
         try {
-            await this.httpService.deleteData(`/companies/${this.id}`);
+            await this.httpService.deleteData(`/company/${this.id}`);
             this.router.navigate(['/dashboard/companies']);
         } catch (err) {
             console.log(err);

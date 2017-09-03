@@ -1,3 +1,25 @@
-<p>
-    calendar-overview works!
-</p>
+<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+    <thead>
+    <tr>
+        <th class="mdl-data-table__cell--non-numeric">Name</th>
+        <th class="mdl-data-table__cell--non-numeric">Street</th>
+        <th class="mdl-data-table__cell--non-numeric">Number</th>
+        <th class="mdl-data-table__cell--non-numeric">City</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let location of locations"
+        routerLink="./{{location._id}}"
+        routerLinkActive="active">
+        <td class="mdl-data-table__cell--non-numeric">{{location.name}}</td>
+        <td class="mdl-data-table__cell--non-numeric">{{location.street}}</td>
+        <td class="mdl-data-table__cell--non-numeric">{{location.number}}</td>
+        <td class="mdl-data-table__cell--non-numeric">{{location.city}}</td>
+    </tr>
+    </tbody>
+</table>
+<button routerLink="./new"
+        routerLinkActive="active"
+        class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored save">
+    <i class="material-icons">add</i>
+</button>

@@ -1,0 +1,66 @@
+<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+    <thead>
+    </thead>
+    <tbody>
+    <tr>
+        <td class="mdl-data-table__cell--non-numeric">Name</td>
+        <td class="mdl-data-table__cell--non-numeric">
+            <input type="text"
+                   name="name"
+                   [(ngModel)]="foodEntrepreneur.name">
+        </td>
+    </tr>
+    <tr>
+        <td class="mdl-data-table__cell--non-numeric">Email</td>
+        <td class="mdl-data-table__cell--non-numeric">
+            <input type="email"
+                   name="email"
+                   [(ngModel)]="foodEntrepreneur.email">
+        </td>
+    </tr>
+    <tr>
+        <td class="mdl-data-table__cell--non-numeric">Phone</td>
+        <td class="mdl-data-table__cell--non-numeric">
+            <input type="text"
+                   name="number"
+                   [(ngModel)]="foodEntrepreneur.phone">
+        </td>
+    </tr>
+    <tr>
+        <td class="mdl-data-table__cell--non-numeric">Description</td>
+        <td class="mdl-data-table__cell--non-numeric">
+            <textarea [(ngModel)]="foodEntrepreneur.description"
+                      name="description"></textarea>
+        </td>
+    </tr>
+    <tr>
+        <td class="mdl-data-table__cell--non-numeric">Image</td>
+        <td class="mdl-data-table__cell--non-numeric">
+            <div class="image-upload"
+                 *ngIf="!foodEntrepreneur.image">
+                <label for="image">{{imageSelect ? 'Image Selected' : 'Select Image'}}</label>
+                <input type="file"
+                       id="image"
+                       (change)="onChange($event)"
+                       accept="image/*" >
+            </div>
+            <div class="image"
+                 *ngIf="foodEntrepreneur.image">
+                <figure>
+                    <button
+                        (click)="deleteImage()"
+                        class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored delete-image">
+                        <i class="material-icons">delete</i>
+                    </button>
+                    <img [src]="foodEntrepreneur.imageUrl"
+                         alt="Afbeelding {{foodEntrepreneur.name}}">
+                </figure>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<button (click)="save(foodEntrepreneur)"
+        class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored save">
+    <i class="material-icons">save</i>
+</button>

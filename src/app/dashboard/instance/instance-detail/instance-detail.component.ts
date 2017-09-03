@@ -29,7 +29,7 @@ export class InstanceDetailComponent implements OnInit {
 
         if (this.id !== 'new') {
             try {
-                this.instance = await this.httpService.getData(`/instances/${this.id}`);
+                this.instance = await this.httpService.getData(`/instance/${this.id}`);
             } catch (err) {
                 console.log(err);
             }
@@ -43,9 +43,9 @@ export class InstanceDetailComponent implements OnInit {
 
         try {
             if (this.id === 'new') {
-                await this.httpService.postData('/instances', {instance});
+                await this.httpService.postData('/instance', {instance});
             } else {
-                await this.httpService.patchData('/instances', {instance});
+                await this.httpService.patchData('/instance', {instance});
             }
 
             this.router.navigate(['/dashboard/instances']);
@@ -57,7 +57,7 @@ export class InstanceDetailComponent implements OnInit {
 
     async delete() {
         try {
-            await this.httpService.deleteData(`/instances/${this.id}`);
+            await this.httpService.deleteData(`/instance/${this.id}`);
             this.router.navigate(['/dashboard/instances']);
         } catch (err) {
             console.log(err);

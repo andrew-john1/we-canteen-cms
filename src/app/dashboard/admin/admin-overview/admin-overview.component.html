@@ -3,9 +3,9 @@
     <tr>
         <th class="mdl-data-table__cell--non-numeric">First Name</th>
         <th class="mdl-data-table__cell--non-numeric">Last Name</th>
+        <th class="mdl-data-table__cell--non-numeric">Food Entrepreneur</th>
         <th class="mdl-data-table__cell--non-numeric">Email</th>
         <th class="mdl-data-table__cell--non-numeric">User Rights</th>
-        <!--<th class="mdl-data-table__cell&#45;&#45;non-numeric">Company</th>-->
     </tr>
     </thead>
     <tbody>
@@ -14,9 +14,9 @@
         routerLinkActive="active">
         <td class="mdl-data-table__cell--non-numeric">{{admin.firstName}}</td>
         <td class="mdl-data-table__cell--non-numeric">{{admin.lastName}}</td>
+        <td class="mdl-data-table__cell--non-numeric">{{foodEntrepreneursObject[admin.foodEntrepreneurId]?.name || 'Not a food entrepreneur'}}</td>
         <td class="mdl-data-table__cell--non-numeric">{{admin.email}}</td>
         <td class="mdl-data-table__cell--non-numeric">{{admin.userRights}}</td>
-        <!--<td class="mdl-data-table__cell&#45;&#45;non-numeric">{{companiesObject[user.companyId].name}}</td>-->
     </tr>
     </tbody>
 </table>

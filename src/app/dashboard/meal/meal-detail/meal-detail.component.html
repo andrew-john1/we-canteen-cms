@@ -1,3 +1,59 @@
-<p>
-  meal-detail works!
-</p>
+<table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+    <thead>
+    </thead>
+    <tbody>
+    <tr>
+        <td class="mdl-data-table__cell--non-numeric">Name</td>
+        <td class="mdl-data-table__cell--non-numeric">
+            <input type="text"
+                   name="name"
+                   [(ngModel)]="meal.name">
+        </td>
+    </tr>
+    <tr>
+        <td class="mdl-data-table__cell--non-numeric">Description</td>
+        <td class="mdl-data-table__cell--non-numeric">
+            <textarea [(ngModel)]="meal.description"
+                      name="description"></textarea>
+        </td>
+    </tr>
+    <tr *ngIf="userRights > 1">
+        <td class="mdl-data-table__cell--non-numeric">Food Entrepreneur</td>
+
+    </tr>
+    <tr>
+        <td class="mdl-data-table__cell--non-numeric">Image</td>
+        <td class="mdl-data-table__cell--non-numeric">
+            <div class="image-upload"
+                 *ngIf="!meal.image">
+                <label for="image">{{imageSelect ? 'Image Selected' : 'Select Image'}}</label>
+                <input type="file"
+                       id="image"
+                       (change)="onChange($event)"
+                       accept="image/*">
+            </div>
+            <div class="image"
+                 *ngIf="meal.image">
+                <figure>
+                    <button
+                        (click)="deleteImage()"
+                        class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored delete-image">
+                        <i class="material-icons">delete</i>
+                    </button>
+                    <img [src]="meal.imageUrl"
+                         alt="Afbeelding {{meal.name}}">
+                </figure>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<button *ngIf="meal._id"
+        (click)="delete()"
+        class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored delete">
+    <i class="material-icons">delete</i>
+</button>
+<button (click)="save(meal)"
+        class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored save">
+    <i class="material-icons">save</i>
+</button>

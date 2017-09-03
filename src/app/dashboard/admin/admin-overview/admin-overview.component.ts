@@ -1,5 +1,4 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {EventService} from '../../../services/event.service';
 import {HttpService} from '../../../services/http.service';
 
 @Component({
@@ -21,8 +20,8 @@ export class AdminOverviewComponent implements OnInit {
                 admins,
                 foodEntrepreneurs
             ] = await Promise.all([
-                this.httpServer.getData('/admins'),
-                this.httpServer.getData('/foodEntrepreneurs')
+                this.httpServer.getData('/admin'),
+                this.httpServer.getData('/foodEntrepreneur')
             ]);
 
             this.admins = admins;
