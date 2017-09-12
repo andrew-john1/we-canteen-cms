@@ -29,9 +29,9 @@ export class LoginComponent {
             if (userRights === 3) {
                 this.router.navigate(['/dashboard/instances']);
             } else if (userRights === 2) {
-                this.router.navigate(['/dashboard/user-overview']);
+                this.router.navigate(['/dashboard/users']);
             } else {
-                this.router.navigate(['/dashboard/order-overview']);
+                this.router.navigate(['/dashboard/orders']);
             }
         } catch (err) {
             console.log(err);

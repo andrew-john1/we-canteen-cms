@@ -44,15 +44,15 @@
             (selected)="selectFoodEntrepreneur($event)"
             (deselected)="deselectFoodEntrepreneur($event)">
         </ng-select>
-        <label for="meal">Meal</label>
+        <label for="meal">Meals</label>
         <ng-select
             id="meal"
-            [(ngModel)]="event.mealId"
+            [(ngModel)]="event.mealIds"
+            [multiple]="true"
             [options]="meals"
             placeholder="Select a meal"
             formControlName="selectMeal"
-            [allowClear]="true"
-            (selected)="selectMeal($event)">
+            [allowClear]="true">
         </ng-select>
     </form>
     <div class="mdl-dialog__actions">

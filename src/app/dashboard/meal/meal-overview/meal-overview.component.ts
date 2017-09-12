@@ -20,6 +20,8 @@ export class MealOverviewComponent implements OnInit {
 
             this.meals = await this.httpServer.getData('/meal');
 
+            console.log(this.meals);
+
             const ids = [];
             this.meals.forEach(meal => {
                 if (ids.indexOf(meal.foodEntrepreneurId) === -1) {
@@ -28,6 +30,8 @@ export class MealOverviewComponent implements OnInit {
             });
 
             const foodEntrepreneurs = await this.httpServer.postData('/foodEntrepreneur/ids', {ids});
+
+            console.log(foodEntrepreneurs);
             foodEntrepreneurs.forEach(foodEntrepreneur => {
                 this.foodEntrepreneursObject[foodEntrepreneur._id] = foodEntrepreneur;
             });

@@ -22,13 +22,12 @@ export class MealDetailComponent implements OnInit {
     constructor(private httpService: HttpService,
                 private activatedRoute: ActivatedRoute,
                 private router: Router) {
+        activatedRoute.params.subscribe(params => {
+            this.id = params['id'];
+        });
     }
 
     async ngOnInit() {
-        this.activatedRoute.params.subscribe(params => {
-            this.id = params['id'];
-        });
-
         this.form = new FormGroup({});
         this.form.addControl('selectFoodEntrepreneur', new FormControl(''));
 
@@ -61,6 +60,8 @@ export class MealDetailComponent implements OnInit {
     }
 
     async save(meal) {
+        console.log(meal);
+
         try {
             if (this.id === 'new') {
                 const response = await this.httpService.postData('/meal', {meal});

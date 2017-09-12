@@ -15,7 +15,7 @@ export class AdminDetailComponent implements OnInit {
     user: any = {};
     foodEntrepreneur = {};
     foodEntrepreneurs = [];
-    maxValue = parseInt(localStorage.getItem('userRights'));
+    userRights = parseInt(localStorage.getItem('userRights'));
 
     constructor(private httpService: HttpService,
                 private activatedRoute: ActivatedRoute,
@@ -35,7 +35,7 @@ export class AdminDetailComponent implements OnInit {
                 this.user = await this.httpService.getData(`/admin/${this.id}`);
             }
 
-            if (this.user.userRights > 1) {
+            if (this.userRights > 1) {
                 const foodEntrepreneurs = await this.httpService.getData('/foodEntrepreneur');
 
                 this.foodEntrepreneurs = foodEntrepreneurs.map(foodEntrepreneur => {
@@ -44,6 +44,8 @@ export class AdminDetailComponent implements OnInit {
 
                     return foodEntrepreneur;
                 });
+
+                console.log(this.foodEntrepreneurs);
             }
         } catch (err) {
              console.log(err);
@@ -51,7 +53,7 @@ export class AdminDetailComponent implements OnInit {
     }
 
     async save(user) {
-        const userRights = this.maxValue;
+        const userRights = this.userRights;
 
         if (user.userRights > userRights) {
             alert('cannot create user with higher user rights');

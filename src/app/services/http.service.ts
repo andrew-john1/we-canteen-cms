@@ -11,59 +11,52 @@ export class HttpService {
     constructor(private http: Http) {
     }
 
-    async getData(url): Promise<any> {
-        try {
-            const token = localStorage.getItem('token');
-            const headers = new Headers({'token': token});
+    getData(url): Promise<any> {
+        const token = localStorage.getItem('token');
+        const headers = new Headers({'token': token});
 
-            const response = await this.http.get(`${this.url}${url}`, {headers})
-                .toPromise();
+        return this.http.get(`${this.url}${url}`, {headers})
+            .toPromise()
+            .then(res => res.json() || {})
+            .catch(err => {
+                console.log(err);
+            });
 
-            return response.json() || {};
-        } catch (err) {
-            console.log(err);
-        }
     }
 
-    async postData(url, data): Promise<any> {
-        try {
-            const token = localStorage.getItem('token');
-            const headers = new Headers({'token': token});
+    postData(url, data): Promise<any> {
+        const token = localStorage.getItem('token');
+        const headers = new Headers({'token': token});
 
-            const response = await this.http.post(`${this.url}${url}`, data, {headers})
-                .toPromise();
-
-            return response.json() || {};
-        } catch (err) {
-            console.log(err);
-        }
+        return this.http.post(`${this.url}${url}`, data, {headers})
+            .toPromise()
+            .then(res => res.json() || {})
+            .catch(err => {
+                console.log(err);
+            });
     }
 
     async patchData(url, data): Promise<any> {
-        try {
-            const token = localStorage.getItem('token');
-            const headers = new Headers({'token': token});
+        const token = localStorage.getItem('token');
+        const headers = new Headers({'token': token});
 
-            const response = await this.http.patch(`${this.url}${url}`, data, {headers})
-                .toPromise();
-
-            return response.json() || {};
-        } catch (err) {
-            console.log(err);
-        }
+        return this.http.patch(`${this.url}${url}`, data, {headers})
+            .toPromise()
+            .then(res => res.json() || {})
+            .catch(err => {
+                console.log(err);
+            });
     }
 
     async deleteData(url): Promise<any> {
-        try {
-            const token = localStorage.getItem('token');
-            const headers = new Headers({'token': token});
+        const token = localStorage.getItem('token');
+        const headers = new Headers({'token': token});
 
-            const response = await this.http.delete(`${this.url}${url}`, {headers})
-                .toPromise();
-
-            return response.json() || {};
-        } catch (err) {
-            console.log(err);
-        }
+        return this.http.delete(`${this.url}${url}`, {headers})
+            .toPromise()
+            .then(res => res.json() || {})
+            .catch(err => {
+                console.log(err);
+            });
     }
 }

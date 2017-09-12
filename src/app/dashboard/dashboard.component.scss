@@ -3,6 +3,7 @@
 :host {
     .demo-drawer-header {
         height: auto;
+        min-height: 64px;
     }
 
     .mdl-layout .demo-drawer header ul {

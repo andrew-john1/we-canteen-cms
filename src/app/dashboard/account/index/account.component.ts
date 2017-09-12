@@ -15,11 +15,14 @@ export class AccountComponent implements OnInit {
 
     constructor(private httpService: HttpService,
                 private router: Router) {
+        console.log('account component');
     }
 
     async ngOnInit() {
+        console.log('ng on init');
         try {
             this.user = await this.httpService.getData(`/admin/${this.userId}`);
+            console.log(this.user);
         } catch (err) {
             console.log(err);
         }

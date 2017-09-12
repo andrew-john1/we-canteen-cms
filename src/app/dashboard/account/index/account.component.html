@@ -26,10 +26,6 @@
                    [(ngModel)]="user.email">
         </td>
     </tr>
-    <tr *ngIf="user.foodEntrepreneurId && user.userRights === 1">
-        <td class="mdl-data-table__cell--non-numeric">Food Entrepeneur</td>
-        <td class="mdl-data-table__cell--non-numeric">{{foodEntrepreneur.name}}</td>
-    </tr>
     </tbody>
 </table>
 <button (click)="resetPassword()"

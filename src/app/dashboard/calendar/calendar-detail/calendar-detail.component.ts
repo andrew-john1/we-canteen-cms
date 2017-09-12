@@ -1,14 +1,20 @@
-import {Component, ChangeDetectionStrategy, OnInit, OnDestroy} from '@angular/core';
+import {Component, ChangeDetectionStrategy, OnInit, OnDestroy, ViewEncapsulation} from '@angular/core';
 import {HttpService} from '../../../services/http.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import * as moment from 'moment';
 import {Subject} from 'rxjs/Subject';
+import {EventService} from '../../../services/event.service';
 
 @Component({
     selector: 'app-calendar-detail',
     changeDetection: ChangeDetectionStrategy.OnPush,
-    styleUrls: ['./calendar-detail.component.scss'],
+    encapsulation: ViewEncapsulation.None,
+    styleUrls: [
+        './calendar-detail.component.scss',
+        '../../../../../node_modules/angular-calendar/dist/css/angular-calendar.css',
+        '../../../../../node_modules/bootstrap/dist/css/bootstrap.css'
+    ],
     templateUrl: './calendar-detail.component.html'
 })
 
@@ -31,10 +37,19 @@ export class CalendarDetailComponent implements OnInit, OnDestroy {
     locationId;
     activeMonth;
 
+    subscription: any;
+
     refresh: Subject<any> = new Subject();
 
     constructor(private route: ActivatedRoute,
+                private eventService: EventService,
+                private router: Router,
                 private httpService: HttpService) {
+        this.subscription = this.eventService.getEventChangeEmitter()
+            .subscribe(() => {
+                this.router.navigate(['/dashboard/calendar']);
+            });
+
         this.sub = this.route.params.subscribe(params => {
             this.locationId = params['locationId'];
         });
@@ -55,6 +70,9 @@ export class CalendarDetailComponent implements OnInit, OnDestroy {
                 this.httpService.getData('/foodEntrepreneur'),
                 this.httpService.getData('/meal')
             ]);
+
+            console.log(foodEntrepreneurs);
+            console.log(meals);
 
             foodEntrepreneurs.map(foodEntrepreneur => {
                 this.foodEntrepreneursObject[foodEntrepreneur._id] = foodEntrepreneur;
@@ -94,8 +112,11 @@ export class CalendarDetailComponent implements OnInit, OnDestroy {
         };
 
         const events = await this.httpService.postData('/calendarEvent/dates', {data});
+        console.log(events);
 
         this.events = events.map(event => {
+            console.log(event);
+
             let foodEntrepreneur = this.foodEntrepreneursObject[event.foodEntrepreneurId];
 
             event.title = foodEntrepreneur.name;
@@ -138,11 +159,7 @@ export class CalendarDetailComponent implements OnInit, OnDestroy {
     }
 
     deselectFoodEntrepreneur(foodEntrepreneur) {
-        this.event.mealId = undefined;
-    }
-
-    selectMeal(meal) {
-        this.event.mealId = meal._id;
+        this.event.mealIds = [];
     }
 
     eventClicked({event}) {
@@ -166,7 +183,7 @@ export class CalendarDetailComponent implements OnInit, OnDestroy {
     }
 
     async save(event) {
-        if (!event.foodEntrepreneurId || !event.mealId) {
+        if (!event.foodEntrepreneurId || !event.mealIds) {
             return;
         }
 
@@ -198,7 +215,7 @@ export class CalendarDetailComponent implements OnInit, OnDestroy {
 
     async delete(id) {
         try {
-            await this.httpService.deleteData(`/calendarEvents/${id}`);
+            await this.httpService.deleteData(`/calendarEvent/${id}`);
 
             this.events.forEach((event, index) => {
                 if (event._id === id) {
@@ -219,6 +236,7 @@ export class CalendarDetailComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
+        this.subscription.unsubscribe();
         this.sub.unsubscribe();
     }
 }
