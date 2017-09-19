@@ -71,9 +71,6 @@ export class CalendarDetailComponent implements OnInit, OnDestroy {
                 this.httpService.getData('/meal')
             ]);
 
-            console.log(foodEntrepreneurs);
-            console.log(meals);
-
             foodEntrepreneurs.map(foodEntrepreneur => {
                 this.foodEntrepreneursObject[foodEntrepreneur._id] = foodEntrepreneur;
 
@@ -112,16 +109,13 @@ export class CalendarDetailComponent implements OnInit, OnDestroy {
         };
 
         const events = await this.httpService.postData('/calendarEvent/dates', {data});
-        console.log(events);
 
         this.events = events.map(event => {
-            console.log(event);
-
             let foodEntrepreneur = this.foodEntrepreneursObject[event.foodEntrepreneurId];
 
             event.title = foodEntrepreneur.name;
             event.start = moment(event.start);
-            event.draggable = true;
+            // event.draggable = true; CREATES BUG ON EVENT CLICK
             event.color = {
                 primary: foodEntrepreneur.color.primary,
                 secondary: foodEntrepreneur.color.secondary
@@ -192,10 +186,11 @@ export class CalendarDetailComponent implements OnInit, OnDestroy {
                 await this.httpService.patchData('/calendarEvent', {event});
             } else {
                 event.locationId = this.locationId;
-                await this.httpService.postData('/calendarEvent', {event});
+                const evt = await this.httpService.postData('/calendarEvent', {event});
 
                 const color = this.foodEntrepreneursObject[event.foodEntrepreneurId].color;
 
+                event._id = evt._id;
                 event.draggable = true;
                 event.start = moment(event.start);
                 event.color = {

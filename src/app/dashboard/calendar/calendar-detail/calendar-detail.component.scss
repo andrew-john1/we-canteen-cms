@@ -9,6 +9,11 @@ app-calendar-detail {
         padding: 15px;
     }
 
+    .cal-month-view .cal-event {
+        width: 12px;
+        height: 12px;
+    }
+
     .mdl-dialog {
         position: absolute;
         top: 50%;

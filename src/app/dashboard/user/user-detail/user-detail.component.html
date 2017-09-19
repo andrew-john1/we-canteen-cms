@@ -6,7 +6,6 @@
         <td class="mdl-data-table__cell--non-numeric">First Name</td>
         <td class="mdl-data-table__cell--non-numeric">
             <input type="text"
-                   name="firstName"
                    [(ngModel)]="user.firstName">
         </td>
     </tr>
@@ -14,7 +13,6 @@
         <td class="mdl-data-table__cell--non-numeric">Last Name</td>
         <td class="mdl-data-table__cell--non-numeric">
             <input type="text"
-                   name="lastName"
                    [(ngModel)]="user.lastName">
         </td>
     </tr>
@@ -22,8 +20,16 @@
         <td class="mdl-data-table__cell--non-numeric">Email</td>
         <td class="mdl-data-table__cell--non-numeric">
             <input type="email"
-                   name="email"
                    [(ngModel)]="user.email">
+        </td>
+    </tr>
+    <tr>
+        <td class="mdl-data-table__cell--non-numeric">User Rights</td>
+        <td class="mdl-data-table__cell--non-numeric">
+            <input type="number"
+                   min="1"
+                   max="3"
+                   [(ngModel)]="user.userRights">
         </td>
     </tr>
     <tr>

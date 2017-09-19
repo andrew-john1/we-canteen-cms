@@ -4,6 +4,7 @@
         <th class="mdl-data-table__cell--non-numeric">First Name</th>
         <th class="mdl-data-table__cell--non-numeric">Last Name</th>
         <th class="mdl-data-table__cell--non-numeric">Email</th>
+        <th class="mdl-data-table__cell--non-numeric">User Rights</th>
         <th class="mdl-data-table__cell--non-numeric">Company</th>
     </tr>
     </thead>
@@ -14,6 +15,7 @@
         <td class="mdl-data-table__cell--non-numeric">{{user.firstName}}</td>
         <td class="mdl-data-table__cell--non-numeric">{{user.lastName}}</td>
         <td class="mdl-data-table__cell--non-numeric">{{user.email}}</td>
+        <td class="mdl-data-table__cell--non-numeric">{{user.userRights}}</td>
         <td class="mdl-data-table__cell--non-numeric">{{companiesObject[user.companyId].name}}</td>
     </tr>
     </tbody>
