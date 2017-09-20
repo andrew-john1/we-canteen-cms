@@ -18,7 +18,13 @@ export class MealOverviewComponent implements OnInit {
     async ngOnInit() {
         try {
 
-            this.meals = await this.httpServer.getData('/meal');
+            const userRights = JSON.parse(localStorage.getItem('userRights'));
+
+            if (userRights > 1) {
+                this.meals = await this.httpServer.getData('/meal');
+            } else {
+                this.meals = await this.httpServer.getData('/meal/foodEntrepreneur');
+            }
 
             console.log(this.meals);
 
