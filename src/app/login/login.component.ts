@@ -16,12 +16,11 @@ export class LoginComponent {
 
     async login(user) {
         try {
-            const response = await this.authService.login(user);
             const {
                 token,
                 userRights,
                 userId
-            } = response;
+            } = await this.authService.login(user);
 
             localStorage.setItem('token', token);
             localStorage.setItem('userRights', userRights);
