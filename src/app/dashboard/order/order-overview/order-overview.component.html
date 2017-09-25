@@ -4,6 +4,7 @@
         <th class="mdl-data-table__cell--non-numeric">Meal</th>
         <th class="mdl-data-table__cell--non-numeric">Food Entrepreneur</th>
         <th class="mdl-data-table__cell--non-numeric">Location</th>
+        <th class="mdl-data-table__cell--non-numeric">Amount</th>
     </tr>
     </thead>
     <tbody>
@@ -13,6 +14,7 @@
         <td class="mdl-data-table__cell--non-numeric">{{mealsObject[order.mealId]?.name}}</td>
         <td class="mdl-data-table__cell--non-numeric">{{foodEntrepreneursObject[order.foodEntrepreneurId]?.name}}</td>
         <td class="mdl-data-table__cell--non-numeric">{{locationsObject[order.locationId]?.name}}</td>
+        <td class="mdl-data-table__cell--non-numeric">{{order.amount}}</td>
     </tr>
     </tbody>
 </table>
