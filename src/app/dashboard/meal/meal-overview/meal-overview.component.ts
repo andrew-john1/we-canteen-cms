@@ -12,21 +12,18 @@ export class MealOverviewComponent implements OnInit {
     instance = {};
     foodEntrepreneursObject = {};
 
-    constructor(private httpServer: HttpService) {
+    constructor(private httpService: HttpService) {
     }
 
     async ngOnInit() {
         try {
-
             const userRights = JSON.parse(localStorage.getItem('userRights'));
 
             if (userRights > 1) {
-                this.meals = await this.httpServer.getData('/meal');
+                this.meals = await this.httpService.getData('/meal');
             } else {
-                this.meals = await this.httpServer.getData('/meal/foodEntrepreneur');
+                this.meals = await this.httpService.getData('/meal/foodEntrepreneur');
             }
-
-            console.log(this.meals);
 
             const ids = [];
             this.meals.forEach(meal => {
@@ -35,13 +32,11 @@ export class MealOverviewComponent implements OnInit {
                 }
             });
 
-            const foodEntrepreneurs = await this.httpServer.postData('/foodEntrepreneur/ids', {ids});
+            const foodEntrepreneurs = await this.httpService.postData('/foodEntrepreneur/ids', {ids});
 
-            console.log(foodEntrepreneurs);
             foodEntrepreneurs.forEach(foodEntrepreneur => {
                 this.foodEntrepreneursObject[foodEntrepreneur._id] = foodEntrepreneur;
             });
-
         } catch (err) {
             console.log(err);
         }
