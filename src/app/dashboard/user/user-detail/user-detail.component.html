@@ -23,6 +23,13 @@
                    [(ngModel)]="user.email">
         </td>
     </tr>
+    <tr *ngIf="!user._id">
+        <td class="mdl-data-table__cell--non-numeric">Password</td>
+        <td class="mdl-data-table__cell--non-numeric">
+            <input type="password"
+                   [(ngModel)]="user.password">
+        </td>
+    </tr>
     <tr>
         <td class="mdl-data-table__cell--non-numeric">User Rights</td>
         <td class="mdl-data-table__cell--non-numeric">
