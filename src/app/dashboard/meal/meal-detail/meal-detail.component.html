@@ -17,6 +17,20 @@
                       name="description"></textarea>
         </td>
     </tr>
+    <tr>
+        <td class="mdl-data-table__cell--non-numeric">Minimum</td>
+        <td class="mdl-data-table__cell--non-numeric">
+            <input type="number"
+                   [(ngModel)]="meal.minimum">
+        </td>
+    </tr>
+    <tr>
+        <td class="mdl-data-table__cell--non-numeric">Maximum</td>
+        <td class="mdl-data-table__cell--non-numeric">
+            <input type="number"
+                   [(ngModel)]="meal.maximum">
+        </td>
+    </tr>
     <tr *ngIf="userRights > 1">
         <td class="mdl-data-table__cell--non-numeric">Food Entrepreneur</td>
         <td class="mdl-data-table__cell--non-numeric"

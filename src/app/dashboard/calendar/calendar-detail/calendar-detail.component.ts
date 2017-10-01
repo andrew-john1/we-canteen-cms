@@ -114,7 +114,7 @@ export class CalendarDetailComponent implements OnInit, OnDestroy {
             let foodEntrepreneur = this.foodEntrepreneursObject[event.foodEntrepreneurId];
 
             event.title = foodEntrepreneur.name;
-            event.start = moment(event.start);
+            event.start = moment(event.date);
             // event.draggable = true; CREATES BUG ON EVENT CLICK
             event.color = {
                 primary: foodEntrepreneur.color.primary,
@@ -173,13 +173,15 @@ export class CalendarDetailComponent implements OnInit, OnDestroy {
         }
 
         this.showDialog = true;
-        this.event.start = moment(date).hour(17).format();
+        this.event.start = moment(date).format('YYYY-MM-DD');
     }
 
     async save(event) {
         if (!event.foodEntrepreneurId || !event.mealIds) {
             return;
         }
+
+        event.date = event.start;
 
         try {
             if (event._id) {
