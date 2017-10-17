@@ -18,6 +18,11 @@ export class MealDetailComponent implements OnInit {
     imageSelect = false;
     url = Config.public;
     userRights = parseInt(localStorage.getItem('userRights'));
+    priceOptions = {
+        align: 'left',
+        allowNegative: false,
+        prefix: '€ '
+    };
 
     constructor(private httpService: HttpService,
                 private activatedRoute: ActivatedRoute,
@@ -60,8 +65,6 @@ export class MealDetailComponent implements OnInit {
     }
 
     async save(meal) {
-        console.log(meal);
-
         try {
             if (this.id === 'new') {
                 const response = await this.httpService.postData('/meal', {meal});
