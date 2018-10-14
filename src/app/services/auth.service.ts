@@ -19,8 +19,7 @@ export class AuthService {
 
     async login(user): Promise<any> {
         try {
-            const response = await this.http.post(`${this.url}/admin/login`, {user})
-                .toPromise();
+            const response = await this.http.post(`${this.url}/admin/login`, {user}).toPromise();
 
             this.isLoggedIn = true;
             return response.json() || {};
